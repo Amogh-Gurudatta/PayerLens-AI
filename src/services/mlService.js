@@ -1,19 +1,20 @@
 /**
  * PayerLens AI - ML Backend Service Integration Client (v2.0)
  * Novo Nordisk GBS Hackathon 2026
- * 
+ *
  * Interacts with FastAPI backend (POST /predict, GET /model-info) and provides
  * explainability decision drivers alongside calibrated access scores.
  */
 
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
 
 export async function getMLPrediction(scenarioParams) {
   try {
     const response = await fetch(`${API_BASE_URL}/predict`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         icer_band: scenarioParams.icer_band ?? 0,
@@ -44,10 +45,13 @@ export async function getMLPrediction(scenarioParams) {
       composite: data.composite,
       details: data.details,
       decision_drivers: data.decision_drivers,
-      isLive: true
+      isLive: true,
     };
   } catch (error) {
-    console.warn('FastAPI ML backend offline or unreachable. Falling back to calibrated local predictions:', error.message);
+    console.warn(
+      "FastAPI ML backend offline or unreachable. Falling back to calibrated local predictions:",
+      error.message,
+    );
     return null;
   }
 }

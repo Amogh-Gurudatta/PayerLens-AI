@@ -89,19 +89,46 @@ SMR_LABEL_MAP = {
     "Modere": 1, "Faible": 0, "Insuffisant": 0,
 }
 
+def _jitter(value, rel_spread, lo=None, hi=None, integer=False):
+    """Sample a value around `value` with +/- rel_spread relative noise.
+
+    Real drugs sharing an ASMR/label bucket do NOT have identical trial data —
+    treating the ASMR-level lookup as an exact constant makes every imputed
+    feature a deterministic (and therefore perfectly invertible) function of
+    the very variable that determines the training label. Jittering breaks
+    that 1:1 mapping so the model has to learn a genuine, noisy relationship
+    between features and outcome instead of memorizing the label's encoding.
+    """
+    noisy = value * (1 + np.random.uniform(-rel_spread, rel_spread))
+    if lo is not None or hi is not None:
+        noisy = np.clip(noisy, lo if lo is not None else -np.inf, hi if hi is not None else np.inf)
+    return int(round(noisy)) if integer else round(float(noisy), 3)
+
+def _flip(binary_value, flip_prob):
+    """Flip a 0/1 flag with small probability, for the same reason as _jitter."""
+    return 1 - binary_value if np.random.random() < flip_prob else binary_value
+
 def enrich_features(drug_name_lower, asmr_val):
+    defaults = ASMR_FEATURE_MAP.get(asmr_val, ASMR_FEATURE_MAP["V"])
+    # Even for a matched real trial, safety/cost/unmet-need aren't reported in
+    # KNOWN_TRIAL_ENDPOINTS, so they still fall back to the ASMR-level bucket —
+    # jitter them here too rather than reusing the bucket's constant verbatim.
+    safety = _jitter(defaults["safety_tolerability"], 0.12, lo=1, hi=4, integer=True)
+    cost_r = _jitter(defaults["cost_ratio_soc"], 0.15, lo=0.1)
+
     for key, vals in KNOWN_TRIAL_ENDPOINTS.items():
         if key in drug_name_lower:
             hr, hosp, dc, qol, eg, cit = vals
-            defaults = ASMR_FEATURE_MAP.get(asmr_val, ASMR_FEATURE_MAP["V"])
-            return (hr, hosp, dc, qol, eg, 1,
-                    defaults["safety_tolerability"],
-                    defaults["cost_ratio_soc"],
+            return (hr, hosp, dc, qol, eg, 1, safety, cost_r,
                     cit, "CLINICAL_TRIAL_EMPIRICAL")
-    d = ASMR_FEATURE_MAP.get(asmr_val, ASMR_FEATURE_MAP["V"])
-    return (d["hr_mortality"], d["hosp_reduction"], d["direct_comparator"],
-            d["qol_improvement"], d["evidence_grade"], d["prespecified_subgroup"],
-            d["safety_tolerability"], d["cost_ratio_soc"],
+
+    hr     = _jitter(defaults["hr_mortality"], 0.10, lo=0.30, hi=1.20)
+    hosp   = _jitter(defaults["hosp_reduction"], 0.20, lo=0.0, hi=60.0)
+    qol    = _jitter(defaults["qol_improvement"], 0.25, lo=0.0, hi=1.0)
+    eg     = int(np.clip(defaults["evidence_grade"] + np.random.choice([-1, 0, 0, 1]), 1, 4))
+    dc     = _flip(defaults["direct_comparator"], 0.10)
+    psub   = _flip(defaults["prespecified_subgroup"], 0.15)
+    return (hr, hosp, dc, qol, eg, psub, safety, cost_r,
             f"ASMR-{asmr_val}-imputed", "MODELLED_ESTIMATE")
 
 def is_biomarker(lib):
@@ -162,6 +189,7 @@ def fetch_has_records():
 
         hr, hosp, dc, qol, eg, psub, safety, cost_r, citation, prov = enrich_features(drug.lower(), asmr_val)
         d = ASMR_FEATURE_MAP.get(asmr_val, ASMR_FEATURE_MAP["V"])
+        unmet = _jitter(d["unmet_need"], 0.15, lo=1, hi=5, integer=True)
 
         records.append({
             "drug_name": drug[:80], "indication": libelle[:120], "country": "FR",
@@ -169,7 +197,7 @@ def fetch_has_records():
             "hr_mortality": hr, "hosp_reduction": hosp,
             "biomarker_defined": is_biomarker(libelle),
             "budget_impact_m": round(np.random.uniform(1.0, 45.0), 1),
-            "unmet_need": d["unmet_need"], "orphan_status": is_orphan(libelle),
+            "unmet_need": unmet, "orphan_status": is_orphan(libelle),
             "qol_improvement": qol, "evidence_grade": eg,
             "prespecified_subgroup": psub, "safety_tolerability": safety,
             "cost_ratio_soc": cost_r,
@@ -400,6 +428,12 @@ def train_country_model(df_country, country_code):
     strat = y if min_class >= 2 else None
     X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.20, random_state=SEED, stratify=strat)
 
+    # n_splits must fit the POST-split training labels, not the full dataset —
+    # an 80/20 split can leave a class with fewer members than the full-set
+    # count suggested, which would make StratifiedKFold raise inside
+    # CalibratedClassifierCV and silently fall back to an uncalibrated model.
+    min_class_tr = y_tr.value_counts().min()
+
     rf  = RandomForestClassifier(n_estimators=300, max_depth=7, min_samples_leaf=2,
                                   class_weight="balanced", random_state=SEED)
     gbm = GradientBoostingClassifier(n_estimators=150, max_depth=4, learning_rate=0.08,
@@ -409,7 +443,7 @@ def train_country_model(df_country, country_code):
     voting = VotingClassifier(estimators=[("rf", rf),("gbm", gbm),("lr", lr)],
                               voting="soft")
 
-    n_splits = min(5, min_class) if min_class >= 3 else 2
+    n_splits = min(5, min_class_tr) if min_class_tr >= 3 else 2
     cv = StratifiedKFold(n_splits=n_splits, shuffle=True, random_state=SEED)
 
     try:

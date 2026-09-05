@@ -34,6 +34,11 @@ export default function CountryModal({
 
   const isHigh = simulatedScore >= 75;
   const isMedium = simulatedScore >= 60 && simulatedScore < 75;
+  const viabilityBadge = isHigh
+    ? { text: 'High Viability', style: 'bg-emerald-50 text-emerald-800 border-emerald-300' }
+    : isMedium
+    ? { text: 'Moderate Access', style: 'bg-amber-50 text-amber-800 border-amber-300' }
+    : { text: 'Restricted Access', style: 'bg-rose-50 text-rose-800 border-rose-300' };
   const currencySymbol = countryKey === 'UK' ? '£' : '€';
 
   const handleCopyCitation = () => {
@@ -114,7 +119,12 @@ export default function CountryModal({
               </div>
             </div>
 
-            <ProvenanceBadge type={ecosystem.provenanceType} size="sm" />
+            <div className="flex flex-col items-end gap-2">
+              <span className={`text-[10px] font-medium px-2 py-0.5 rounded-md border ${viabilityBadge.style}`}>
+                {viabilityBadge.text}
+              </span>
+              <ProvenanceBadge type={ecosystem.provenanceType} size="sm" />
+            </div>
           </div>
 
           {/* Statutory Framework Grid */}

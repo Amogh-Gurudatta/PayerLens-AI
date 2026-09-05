@@ -25,8 +25,10 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
+    # No cookies/auth are used by this API, so a wildcard origin is safe here —
+    # but browsers reject "*" paired with allow_credentials=True, so keep that off.
     allow_origins=["*"],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -90,9 +92,11 @@ class PredictRequest(BaseModel):
     cost_ratio_soc:       float = Field(1.0,  ge=0,         description="Drug cost as ratio vs standard of care")
 
 class PredictResponse(BaseModel):
-    UK:      float = Field(..., description="NICE access probability %")
-    Germany: float = Field(..., description="G-BA access probability %")
-    France:  float = Field(..., description="HAS access probability %")
+    UK:      Optional[float] = Field(None, description="NICE access probability % (null if `country` restricted the request to another market)")
+    Germany: Optional[float] = Field(None, description="G-BA access probability % (null if `country` restricted the request to another market)")
+    France:  Optional[float] = Field(None, description="HAS access probability % (null if `country` restricted the request to another market)")
+    composite: Optional[float] = Field(None, description="Mean access probability % across the markets actually predicted")
+    decision_drivers: Optional[Dict[str, Any]] = Field(None, description="Rule-based catalysts/frictions per market, for the explainability panel")
     details: Optional[Dict[str, Any]] = None
     model_version: str = "unknown"
 
@@ -158,6 +162,47 @@ def predict_for_country(country_code: str, req: PredictRequest):
     probs_pct = [round(float(p) * 100, 1) for p in probs]
     return access, probs_pct, classes
 
+def build_decision_drivers(req: PredictRequest, country_codes) -> Dict[str, Any]:
+    """Rule-based explainability: same qualitative logic the frontend uses in its
+    offline fallback, applied to whichever markets were actually predicted."""
+    country_names = {"UK": "UK", "DE": "Germany", "FR": "France"}
+    drivers: Dict[str, Any] = {}
+
+    for code in country_codes:
+        catalysts, frictions = [], []
+
+        if req.direct_comparator:
+            if code == "DE":
+                catalysts.append("Direct comparator vs guideline zVT")
+            elif code == "UK":
+                catalysts.append("Head-to-head trial vs standard of care")
+            else:
+                catalysts.append("Head-to-head comparator supports ASMR premium")
+        else:
+            if code == "DE":
+                frictions.append("Lack of direct head-to-head comparator vs zVT")
+            else:
+                frictions.append("No active comparator; indirect comparison required")
+
+        if req.qol_improvement and req.qol_improvement >= 0.10:
+            catalysts.append("Demonstrated PRO / quality-of-life improvement")
+
+        if code == "UK" and req.icer_band >= 2:
+            frictions.append("ICER threshold exceedance requires commercial discount")
+
+        if req.evidence_grade <= 2:
+            frictions.append("Evidence grade below RCT standard weakens dossier")
+
+        if code in ("UK", "DE") and not req.prespecified_subgroup:
+            frictions.append("Post-hoc (non pre-specified) subgroup analysis")
+
+        if req.biomarker_defined:
+            catalysts.append("Biomarker-stratified population narrows uncertainty")
+
+        drivers[country_names[code]] = {"catalysts": catalysts, "frictions": frictions}
+
+    return drivers
+
 # ─── Endpoints ────────────────────────────────────────────────────────────────
 @app.get("/health")
 def health_check():
@@ -169,6 +214,22 @@ def health_check():
         "service": "PayerLens AI ML Engine v3"
     }
 
+@app.get("/model-info")
+def model_info():
+    if model_artifact is None:
+        load_model()
+        if model_artifact is None:
+            raise HTTPException(status_code=500, detail="ML model artifact not loaded.")
+    return {
+        "model_version": MODEL_VERSION,
+        "country_models": list(COUNTRY_MODELS.keys()),
+        "feature_cols": FEATURE_COLS,
+        "accuracies": model_artifact.get("accuracies"),
+        "feature_importances": model_artifact.get("feature_importances"),
+        "dataset_size": model_artifact.get("dataset_size"),
+        "cv_accuracy": model_artifact.get("cv_accuracy"),
+    }
+
 @app.post("/predict", response_model=PredictResponse)
 def predict_reimbursement(req: PredictRequest):
     if not COUNTRY_MODELS and COMBINED_MODEL is None:
@@ -176,26 +237,33 @@ def predict_reimbursement(req: PredictRequest):
         if not COUNTRY_MODELS and COMBINED_MODEL is None:
             raise HTTPException(status_code=500, detail="ML model artifact not loaded.")
 
-    uk_access, uk_probs, uk_cls = predict_for_country("UK", req)
-    de_access, de_probs, de_cls = predict_for_country("DE", req)
-    fr_access, fr_probs, fr_cls = predict_for_country("FR", req)
+    requested = req.country.strip().upper() if req.country else None
+    country_codes = [requested] if requested in ("UK", "DE", "FR") else ["UK", "DE", "FR"]
 
     def class_dict(probs_pct, classes):
         labels = {0: "Rejected", 1: "Restricted", 2: "Full_Positive"}
         return {labels.get(int(c), str(c)): p for c, p in zip(classes, probs_pct)}
 
+    results = {code: predict_for_country(code, req) for code in country_codes}
+    access_by_code = {code: r[0] for code, r in results.items()}
+    composite = round(sum(access_by_code.values()) / len(access_by_code), 1) if access_by_code else None
+
+    details_key = {"UK": "UK_class_probs", "DE": "Germany_class_probs", "FR": "France_class_probs"}
+    details = {
+        details_key[code]: class_dict(probs_pct, classes)
+        for code, (_, probs_pct, classes) in results.items()
+    }
+    details["feature_count"] = len(FEATURE_COLS)
+    details["model_version"] = MODEL_VERSION
+
     return PredictResponse(
-        UK=uk_access,
-        Germany=de_access,
-        France=fr_access,
+        UK=access_by_code.get("UK"),
+        Germany=access_by_code.get("DE"),
+        France=access_by_code.get("FR"),
+        composite=composite,
+        decision_drivers=build_decision_drivers(req, country_codes),
         model_version=MODEL_VERSION,
-        details={
-            "UK_class_probs":      class_dict(uk_probs, uk_cls),
-            "Germany_class_probs": class_dict(de_probs, de_cls),
-            "France_class_probs":  class_dict(fr_probs, fr_cls),
-            "feature_count": len(FEATURE_COLS),
-            "model_version": MODEL_VERSION,
-        }
+        details=details,
     )
 
 if __name__ == "__main__":

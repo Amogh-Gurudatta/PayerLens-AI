@@ -12,7 +12,7 @@ import StrategicRecommendationBanner from './components/StrategicRecommendationB
 import CustomSimulatorModal from './components/CustomSimulatorModal';
 import OnboardingTour, { TOUR_STORAGE_KEY } from './components/OnboardingTour';
 import { SCENARIOS, calculateSimulatedAccess } from './data/payerData';
-import { getMLPrediction } from './services/mlService';
+import { getMLPrediction, getMLModelInfo } from './services/mlService';
 import {
   Sliders, Activity, Users, ShieldCheck, CheckSquare, Square, RefreshCw,
   Info, ExternalLink, Calculator, Cpu, Target
@@ -27,7 +27,8 @@ export default function App() {
   const [isCustomSimOpen, setIsCustomSimOpen] = useState(false);
   const [mlData, setMlData] = useState(null);
   const [isMlServerLive, setIsMlServerLive] = useState(false);
-  
+  const [modelCvAccuracy, setModelCvAccuracy] = useState(null);
+
   // Modals State
   const [activeCountryModal, setActiveCountryModal] = useState(null); // 'UK' | 'DE' | 'FR' | null
   const [activeEvidenceModal, setActiveEvidenceModal] = useState(null); // 'clinical' | 'objections' | 'strategy' | null
@@ -52,27 +53,45 @@ export default function App() {
     window.localStorage.setItem(TOUR_STORAGE_KEY, 'true');
   };
 
-  // Fetch ML Prediction from FastAPI backend
+  // Fetch the model's real cross-validated accuracy once, so the "Live" badge
+  // reports the actual trained figure instead of a hardcoded number that
+  // silently goes stale every time the model is retrained.
   useEffect(() => {
     let isMounted = true;
-    const fetchPrediction = async () => {
+    getMLModelInfo().then((info) => {
+      if (isMounted && info && typeof info.cv_accuracy === 'number') {
+        setModelCvAccuracy(info.cv_accuracy * 100);
+      }
+    });
+    return () => { isMounted = false; };
+  }, []);
+
+  // Fetch a live ML prediction from the FastAPI backend. Price and the
+  // companion-diagnostic toggle are folded into the request (icer_band /
+  // cost_ratio_soc scale with price) so the live model actually responds to
+  // slider movement instead of only depending on which scenario is selected.
+  useEffect(() => {
+    let isMounted = true;
+    const timer = setTimeout(async () => {
       const scenario = SCENARIOS[selectedScenarioKey];
       if (!scenario) return;
 
+      const icerBand = priceEuros > 6000 ? 3 : priceEuros > 4500 ? 2 : priceEuros > 3000 ? 1 : 0;
+
       const res = await getMLPrediction({
-        icer_band: scenario.icer_band ?? (['D', 'C'].includes(scenario.id) ? 0 : scenario.id === 'B' ? 1 : 2),
+        icer_band: icerBand,
         direct_comparator: scenario.direct_comparator ?? (['D', 'C', 'B'].includes(scenario.id) ? 1 : 0),
         hr_mortality: scenario.clinicalHR ?? 0.74,
         hosp_reduction: scenario.id === 'D' ? 32.0 : scenario.id === 'C' ? 29.0 : scenario.id === 'B' ? 26.0 : scenario.id === 'E' ? 21.0 : 12.0,
         biomarker_defined: scenario.id === 'D' ? 1 : 0,
-        budget_impact_m: scenario.id === 'D' ? 15.0 : scenario.id === 'C' ? 22.0 : scenario.id === 'B' ? 35.0 : scenario.id === 'E' ? 10.0 : 85.0,
+        budget_impact_m: Math.round((scenario.eligiblePopulation.total / 3) * 0.06 * priceEuros / 1_000_000),
         unmet_need: scenario.id === 'E' ? 5 : scenario.id === 'A' ? 2 : 4,
         orphan_status: 0,
         qol_improvement: ['D', 'C', 'B'].includes(scenario.id) ? 1 : 0,
         evidence_grade: ['D', 'C', 'B'].includes(scenario.id) ? 3 : 2,
         prespecified_subgroup: scenario.id === 'A' ? 0 : 1,
         safety_tolerability: ['D', 'C'].includes(scenario.id) ? 3 : 2,
-        cost_ratio_soc: scenario.id === 'D' ? 1.6 : scenario.id === 'C' ? 1.8 : scenario.id === 'B' ? 2.2 : scenario.id === 'E' ? 2.8 : 3.5,
+        cost_ratio_soc: Number((priceEuros / 4200).toFixed(2)),
       });
 
       if (isMounted) {
@@ -83,19 +102,46 @@ export default function App() {
           setIsMlServerLive(false);
         }
       }
-    };
-    fetchPrediction();
-    return () => { isMounted = false; };
-  }, [selectedScenarioKey]);
+    }, 300); // debounce so dragging the price slider doesn't spam the backend
 
-  // Real-time Calibrated Access Simulation
+    return () => { isMounted = false; clearTimeout(timer); };
+  }, [selectedScenarioKey, priceEuros]);
+
+  // Real-time Calibrated Access Simulation.
+  // When the live FastAPI model is reachable, its per-country probabilities
+  // (which already reflect price + evidence via the fetch above) become the
+  // displayed scores; the companion-diagnostic friction penalty — a
+  // regulatory/administrative delay the model was never trained to detect —
+  // is still layered on top. Falls back to the local calibrated heuristic
+  // whenever the backend is offline.
   const simulatedOutput = useMemo(() => {
-    return calculateSimulatedAccess({
+    const local = calculateSimulatedAccess({
       scenarioKey: selectedScenarioKey,
       priceEuros,
       companionDiagnosticRequired
     });
-  }, [selectedScenarioKey, priceEuros, companionDiagnosticRequired]);
+
+    if (!isMlServerLive || !mlData) return local;
+
+    const diagnosticPenalty = { UK: -7, DE: -3, FR: -5 };
+    const clamp = (v) => Math.min(99, Math.max(10, Math.round(v)));
+
+    const finalUK = clamp(mlData.UK + (companionDiagnosticRequired ? diagnosticPenalty.UK : 0));
+    const finalDE = clamp(mlData.Germany + (companionDiagnosticRequired ? diagnosticPenalty.DE : 0));
+    const finalFR = clamp(mlData.France + (companionDiagnosticRequired ? diagnosticPenalty.FR : 0));
+    const compositeScore = Math.round((finalUK + finalDE + finalFR) / 3);
+
+    return {
+      scores: { UK: finalUK, DE: finalDE, FR: finalFR, composite: compositeScore },
+      baseScores: local.baseScores,
+      modifiers: {
+        UK: finalUK - local.baseScores.UK,
+        DE: finalDE - local.baseScores.DE,
+        FR: finalFR - local.baseScores.FR,
+      },
+      budgetImpact: local.budgetImpact
+    };
+  }, [selectedScenarioKey, priceEuros, companionDiagnosticRequired, isMlServerLive, mlData]);
 
   // Reset parameters to baseline
   const handleResetDefaults = () => {
@@ -283,7 +329,9 @@ export default function App() {
                       )}
                     </div>
                     <div className="text-[10px] text-slate-500 font-mono">
-                      {isMlServerLive ? `FastAPI live (85.6% CV)` : `RF + HistGB calibrated`}
+                      {isMlServerLive
+                        ? `FastAPI live${modelCvAccuracy != null ? ` (${modelCvAccuracy.toFixed(1)}% CV)` : ''}`
+                        : `RF + HistGB calibrated`}
                     </div>
                   </div>
                 </div>

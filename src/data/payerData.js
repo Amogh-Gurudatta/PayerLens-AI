@@ -575,7 +575,6 @@ export function calculateSimulatedAccess({
 
   // Reference baseline price: €4,200/year (standard cardiovascular oral specialty benchmark)
   const baselinePrice = 4200;
-  const priceDelta = priceEuros - baselinePrice;
 
   // 1. UK (NICE) Price Sensitivity:
   // Highly sensitive to ICER ceiling (£20k-£30k) and £20m budget impact test.
@@ -618,7 +617,7 @@ export function calculateSimulatedAccess({
     frModifier -= frOverage * 24;
   } else {
     const frSavings = (baselinePrice - priceEuros) / 2700;
-    frModifier += 6;
+    frModifier += frSavings * 6; // Up to +6% at €1,500
   }
   if (companionDiagnosticRequired) {
     frModifier -= 5; // French RIHN (Référentiel des actes innovants) diagnostic reimbursement lag

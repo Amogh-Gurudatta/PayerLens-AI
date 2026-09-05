@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Sliders, Cpu, X, Check, Activity, AlertTriangle, ShieldCheck, Heart, FileCheck, CheckCircle2, AlertCircle } from 'lucide-react';
-import { getMLPrediction } from '../services/mlService';
+import { getMLPrediction, getMLModelInfo } from '../services/mlService';
 
 export default function CustomSimulatorModal({ isOpen, onClose }) {
   const [hrMortality, setHrMortality] = useState(0.70);
@@ -18,6 +18,7 @@ export default function CustomSimulatorModal({ isOpen, onClose }) {
   const [predictionResult, setPredictionResult] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [activeDriverTab, setActiveDriverTab] = useState('DE');
+  const [modelCvAccuracy, setModelCvAccuracy] = useState(null);
 
   if (!isOpen) return null;
 
@@ -51,6 +52,11 @@ export default function CustomSimulatorModal({ isOpen, onClose }) {
     setIsLoading(false);
     if (res) {
       setPredictionResult(res);
+      getMLModelInfo().then((info) => {
+        if (info && typeof info.cv_accuracy === 'number') {
+          setModelCvAccuracy(info.cv_accuracy * 100);
+        }
+      });
     } else {
       // Calibrated fallback calculation if offline
       const ukScore = Math.min(98, Math.max(15, Math.round(92 - (hrMortality - 0.7) * 50 - (priceEuros > 4500 ? 18 : 0) + (qolImprovement ? 4 : -6))));
@@ -98,11 +104,11 @@ export default function CustomSimulatorModal({ isOpen, onClose }) {
                   Custom Molecule & Trial Endpoint Simulator
                 </h2>
                 <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-mono font-bold">
-                  v2.0 Calibrated
+                  v3 Calibrated
                 </span>
               </div>
               <p className="text-xs text-slate-500 m-0">
-                16-Feature Calibrated Soft Voting Ensemble (Random Forest + HistGradientBoosting + Sigmoid Calibration)
+                13-Feature Calibrated Soft Voting Ensemble (Random Forest + Gradient Boosting + Logistic Regression, Sigmoid Calibration)
               </p>
             </div>
           </div>
@@ -344,7 +350,9 @@ export default function CustomSimulatorModal({ isOpen, onClose }) {
                 <span>Calibrated HTA Access Probabilities & Decision Drivers</span>
               </span>
               <span className="text-[10px] font-mono text-slate-400">
-                {predictionResult.isLive ? 'FastAPI Ensemble Live (85.6% CV)' : 'Calibrated Local Ensemble Artifact'}
+                {predictionResult.isLive
+                  ? `FastAPI Ensemble Live${modelCvAccuracy != null ? ` (${modelCvAccuracy.toFixed(1)}% CV)` : ''}`
+                  : 'Calibrated Local Ensemble Artifact'}
               </span>
             </div>
 
