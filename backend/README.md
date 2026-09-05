@@ -9,6 +9,16 @@ The **PayerLens AI ML Backend** is a high-performance Python microservice servin
 
 ---
 
+## Live Deployment
+
+- **API base URL**: [https://payerlens-ai-backend.onrender.com/](https://payerlens-ai-backend.onrender.com/)
+- **Swagger UI**: [https://payerlens-ai-backend.onrender.com/docs](https://payerlens-ai-backend.onrender.com/docs)
+- **Frontend consuming this API**: [https://payer-lens-ai.vercel.app/](https://payer-lens-ai.vercel.app/)
+
+> Hosted on Render's free tier, which sleeps after periods of inactivity — the first request after a while can take up to ~60s to wake the instance.
+
+---
+
 ## Architecture & Model Details
 
 - **Framework**: FastAPI with asynchronous endpoints, CORS middleware, and Pydantic v2 data validation.

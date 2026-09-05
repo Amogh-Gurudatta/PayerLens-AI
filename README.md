@@ -6,11 +6,23 @@
 [![Frontend](https://img.shields.io/badge/React%2019-Vite%208-0284c7?style=for-the-badge)](https://vitejs.dev/)
 [![ML Backend](https://img.shields.io/badge/FastAPI-Ensemble%20ML%20v3.0-4f46e5?style=for-the-badge)](#dual-prediction-engine-mcdm-simulation--calibrated-ensemble-ml)
 [![Accuracy](https://img.shields.io/badge/5--Fold%20CV-85.6%25-10b981?style=for-the-badge)](MODEL_CARD.md)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-000000?style=for-the-badge&logo=vercel)](https://payer-lens-ai.vercel.app/)
 
 An audit-ready, enterprise-grade healthcare access intelligence platform designed to predict, simulate, and optimize reimbursement outcomes across the three major European Health Technology Assessment (HTA) bodies:
 - 🇬🇧 **United Kingdom (NICE)**: Cost-utility thresholds (£20,000–£30,000/QALY gained) & NHS £20M Budget Impact Test.
 - 🇩🇪 **Germany (G-BA / IQWiG)**: AMNOG Early Benefit Assessment (SGB V § 35a), Added Clinical Benefit (*Zusatznutzen*) vs designated standard comparator (*zVT*), and statutory pricing windows.
 - 🇫🇷 **France (HAS Transparence)**: Medical Benefit (*SMR*) & Added Clinical Value (*ASMR Level I to V*), 100% ALD public coverage, and CEESP budget caps (>€20M).
+
+---
+
+## Live Deployment
+
+| Service | URL |
+|---|---|
+| 🖥️ **Frontend** (Vite + React, Vercel) | [payer-lens-ai.vercel.app](https://payer-lens-ai.vercel.app/) |
+| ⚙️ **ML Backend** (FastAPI, Render) | [payerlens-ai-backend.onrender.com](https://payerlens-ai-backend.onrender.com/) |
+
+> Render's free tier spins the backend down when idle — the first `/predict` request after inactivity may take up to a minute while it wakes up; the frontend falls back to its calibrated local heuristic in the meantime.
 
 ---
 
