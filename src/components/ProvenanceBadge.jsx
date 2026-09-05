@@ -14,17 +14,17 @@ export default function ProvenanceBadge({ type = 'STATUTORY', customLabel, size 
 
   const sizeClasses = {
     xs: 'text-[10px] px-1.5 py-0.5 font-medium',
-    sm: 'text-xs px-2.5 py-1 font-medium',
-    md: 'text-xs px-3 py-1.5 font-semibold'
+    sm: 'text-xs px-2 py-0.5 font-medium',
+    md: 'text-xs px-2.5 py-1 font-medium'
   };
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full border transition-all shadow-sm select-none ${meta.badgeColor} ${sizeClasses[size] || sizeClasses.sm} ${className}`}
+      className={`inline-flex items-center gap-1.5 rounded-md border select-none ${meta.badgeColor} ${sizeClasses[size] || sizeClasses.sm} ${className}`}
       title={`${meta.label}: ${meta.description}`}
     >
       {showDot && (
-        <span className={`w-1.5 h-1.5 rounded-full ${meta.dotColor} animate-pulse-subtle flex-shrink-0`} />
+        <span className={`w-1.5 h-1.5 rounded-full ${meta.dotColor} flex-shrink-0`} />
       )}
       <span className="truncate">{label}</span>
     </span>

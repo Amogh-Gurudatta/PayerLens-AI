@@ -37,28 +37,21 @@
 }
 
 @layer utilities {
-  /* High-credibility pharmaceutical card surfaces */
+  /* Quiet, consistent card surface */
   .pharma-card {
     background: #ffffff;
     border: 1px solid #e2e8f0;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.02);
   }
 
   .pharma-card-hover {
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: border-color 0.15s ease;
   }
   .pharma-card-hover:hover {
-    border-color: #00205b;
-    box-shadow: 0 4px 12px -2px rgba(0, 32, 91, 0.08), 0 2px 6px -1px rgba(0, 32, 91, 0.04);
-    transform: translateY(-1px);
+    border-color: #94a3b8;
   }
 
   .pharma-surface {
     background: #f8fafc;
     border: 1px solid #e2e8f0;
-  }
-
-  .pharma-header-gradient {
-    background: linear-gradient(135deg, #00205b 0%, #003380 60%, #004b87 100%);
   }
 }

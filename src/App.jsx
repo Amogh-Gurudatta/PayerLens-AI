@@ -10,6 +10,7 @@ import ProvenanceDrawer from './components/ProvenanceDrawer';
 import TeamPersonaBar from './components/TeamPersonaBar';
 import StrategicRecommendationBanner from './components/StrategicRecommendationBanner';
 import CustomSimulatorModal from './components/CustomSimulatorModal';
+import OnboardingTour, { TOUR_STORAGE_KEY } from './components/OnboardingTour';
 import { SCENARIOS, calculateSimulatedAccess } from './data/payerData';
 import { getMLPrediction } from './services/mlService';
 import {
@@ -32,9 +33,24 @@ export default function App() {
   const [activeEvidenceModal, setActiveEvidenceModal] = useState(null); // 'clinical' | 'objections' | 'strategy' | null
   const [isMethodologyOpen, setIsMethodologyOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [runTour, setRunTour] = useState(false);
 
   // Active Scenario Object
   const currentScenario = SCENARIOS[selectedScenarioKey] || SCENARIOS['D'];
+
+  // Auto-launch the onboarding tour on a visitor's first session
+  useEffect(() => {
+    const hasSeenTour = window.localStorage.getItem(TOUR_STORAGE_KEY);
+    if (!hasSeenTour) {
+      const timer = setTimeout(() => setRunTour(true), 600);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  const handleTourFinish = () => {
+    setRunTour(false);
+    window.localStorage.setItem(TOUR_STORAGE_KEY, 'true');
+  };
 
   // Fetch ML Prediction from FastAPI backend
   useEffect(() => {
@@ -94,8 +110,12 @@ export default function App() {
       <Header
         onOpenDrawer={() => setIsDrawerOpen(true)}
         onOpenMethodology={() => setIsMethodologyOpen(true)}
+        onStartTour={() => setRunTour(true)}
         activeScenario={currentScenario}
       />
+
+      {/* Guided Onboarding Tour */}
+      <OnboardingTour run={runTour} onFinish={handleTourFinish} />
 
       {/* Main Full-Width Content Container */}
       <main className="flex-1 w-full px-4 sm:px-6 lg:px-10 py-6 space-y-6">
@@ -115,142 +135,156 @@ export default function App() {
         {/* Top Control Bar: Cohort Switcher, Price Slider, Companion Diagnostic */}
         <section
           aria-label="Simulation Controls and Cohort Bar"
-          className="pharma-card rounded-xl p-5 shadow-xs space-y-4"
+          className="pharma-card rounded-xl p-5 space-y-4"
         >
-          <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-5">
-            
-            {/* 1. Cohort Scenario Selector */}
-            <div className="space-y-2">
+          {/* 1. Cohort Scenario Selector with 5-Column Responsive Grid (No orphaned items) */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-medium text-slate-500 flex items-center gap-1.5">
+                <Activity className="w-3.5 h-3.5 text-slate-400" />
+                <span>Historical precedent drug benchmark</span>
+              </span>
+              <span className="text-xs text-slate-500">
+                {currentScenario.shortTag} &bull; HR {currentScenario.clinicalHR} &bull; EU-3 pool: {(currentScenario.eligiblePopulation.total / 1000).toLocaleString()}k
+              </span>
+            </div>
+
+            <div data-tour="scenario-selector" className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 w-full">
+              {Object.keys(SCENARIOS).map((key) => {
+                const sc = SCENARIOS[key];
+                const isSelected = selectedScenarioKey === key;
+                return (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => setSelectedScenarioKey(key)}
+                    className={`text-xs px-3 py-2 rounded-lg font-medium transition-colors flex items-center justify-center gap-1.5 text-center w-full ${
+                      isSelected
+                        ? 'bg-[#00205b] text-white'
+                        : 'bg-slate-50 text-slate-700 hover:text-slate-900 hover:bg-slate-100 border border-slate-200'
+                    }`}
+                  >
+                    <span className="font-semibold">{sc.code}</span>
+                    <span className="text-[11px] opacity-80">({sc.shortTag})</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* 2. Regrouped Control Clusters: Scenario Inputs vs Live Simulation Output */}
+          <div className="flex flex-col lg:flex-row items-stretch gap-5 pt-4 border-t border-slate-100">
+
+            {/* GROUP A: Scenario Inputs */}
+            <div data-tour="scenario-inputs" className="flex-1 space-y-2.5">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-                  <Activity className="w-3.5 h-3.5 text-[#00205b]" />
-                  <span>Historical Precedent Drug Benchmark</span>
+                <span className="text-xs font-medium text-slate-500 flex items-center gap-1.5">
+                  <Sliders className="w-3.5 h-3.5 text-slate-400" />
+                  <span>Scenario inputs</span>
                 </span>
-                <span className="text-xs text-slate-500 font-medium">
-                  {currentScenario.shortTag} &bull; HR {currentScenario.clinicalHR}
-                </span>
+                <button
+                  type="button"
+                  onClick={handleResetDefaults}
+                  className="text-[11px] text-slate-500 hover:text-[#00205b] font-medium flex items-center gap-1 px-2 py-0.5 rounded hover:bg-slate-100 transition-colors"
+                  title="Reset parameters to calibrated baseline"
+                >
+                  <RefreshCw className="w-3 h-3" />
+                  <span>Reset defaults</span>
+                </button>
               </div>
 
-              <div className="flex flex-wrap items-center gap-2">
-                {Object.keys(SCENARIOS).map((key) => {
-                  const sc = SCENARIOS[key];
-                  const isSelected = selectedScenarioKey === key;
-                  return (
-                    <button
-                      key={key}
-                      type="button"
-                      onClick={() => setSelectedScenarioKey(key)}
-                      className={`text-xs px-3.5 py-2 rounded-lg font-medium transition-all flex items-center gap-1.5 ${
-                        isSelected
-                          ? 'bg-[#00205b] text-white font-bold shadow-xs'
-                          : 'bg-slate-50 text-slate-700 hover:text-slate-900 hover:bg-slate-100 border border-slate-200'
-                      }`}
-                    >
-                      <span className="font-bold">{sc.code}</span>
-                      <span className="hidden md:inline text-[11px] opacity-80">({sc.shortTag})</span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* 2. Interactive Simulation Variables (Price & Companion Diagnostic) */}
-            <div className="flex flex-wrap items-center gap-4 bg-slate-50 p-3 rounded-lg border border-slate-200 self-stretch xl:self-auto justify-between xl:justify-start">
-              
-              {/* Price Slider */}
-              <div className="flex items-center gap-3 min-w-[240px] flex-1 sm:flex-initial">
-                <div>
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-[10px] uppercase font-bold text-slate-500">Annual Acquisition Price</span>
-                    <span className="font-mono font-extrabold text-[#00205b] text-xs">
-                      €{priceEuros.toLocaleString()}
-                    </span>
+              <div className="flex flex-wrap items-center gap-4">
+                {/* Annual Acquisition Price Slider */}
+                <div className="flex items-center gap-3 min-w-[230px] flex-1">
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-xs text-slate-600">Annual acquisition price</span>
+                      <span className="font-mono font-semibold text-[#00205b] text-xs">
+                        €{priceEuros.toLocaleString()}
+                      </span>
+                    </div>
+                    <input
+                      type="range"
+                      min="1500"
+                      max="8500"
+                      step="250"
+                      value={priceEuros}
+                      onChange={(e) => setPriceEuros(Number(e.target.value))}
+                      className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#00205b] focus:outline-none mt-1.5"
+                    />
                   </div>
-                  <input
-                    type="range"
-                    min="1500"
-                    max="8500"
-                    step="250"
-                    value={priceEuros}
-                    onChange={(e) => setPriceEuros(Number(e.target.value))}
-                    className="w-36 sm:w-44 h-1.5 bg-slate-300 rounded-lg appearance-none cursor-pointer accent-[#00205b] focus:outline-none mt-1"
-                  />
                 </div>
-                <span className="text-[9px] px-1.5 py-0.5 rounded bg-blue-100 text-blue-900 font-mono font-bold hidden sm:inline">
-                  User Defined
+
+                <div className="h-7 w-px bg-slate-200 hidden sm:block" />
+
+                {/* Companion Diagnostic Toggle */}
+                <button
+                  type="button"
+                  onClick={() => setCompanionDiagnosticRequired(!companionDiagnosticRequired)}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border text-xs transition-colors ${
+                    companionDiagnosticRequired
+                      ? 'bg-blue-50 border-blue-200 text-[#00205b] font-medium'
+                      : 'bg-white border-slate-200 text-slate-500 hover:text-slate-900'
+                  }`}
+                >
+                  {companionDiagnosticRequired ? (
+                    <CheckSquare className="w-4 h-4 text-[#00205b]" />
+                  ) : (
+                    <Square className="w-4 h-4 text-slate-400" />
+                  )}
+                  <span>NT-proBNP assay</span>
+                  <span className="text-[10px] text-slate-400">(NICE DAP)</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Subtle Divider between Inputs and Outputs */}
+            <div className="hidden lg:flex items-center">
+              <div className="w-px h-16 bg-slate-200" />
+            </div>
+
+            {/* GROUP B: Live Simulation Output & Status */}
+            <div data-tour="live-output" className="space-y-2 lg:min-w-[360px] lg:pl-1">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-medium text-slate-500 flex items-center gap-1.5">
+                  <Activity className="w-3.5 h-3.5 text-slate-400" />
+                  <span>Live simulation output</span>
                 </span>
               </div>
 
-              <div className="h-8 w-px bg-slate-200 hidden sm:block" />
-
-              {/* Companion Diagnostic Toggle */}
-              <button
-                type="button"
-                onClick={() => setCompanionDiagnosticRequired(!companionDiagnosticRequired)}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border text-xs transition-colors ${
-                  companionDiagnosticRequired
-                    ? 'bg-blue-50 border-blue-300 text-[#00205b] font-semibold'
-                    : 'bg-white border-slate-300 text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                {companionDiagnosticRequired ? (
-                  <CheckSquare className="w-4 h-4 text-[#00205b]" />
-                ) : (
-                  <Square className="w-4 h-4 text-slate-400" />
-                )}
-                <span>NT-proBNP Assay</span>
-                <span className="text-[9px] font-mono font-bold px-1.5 py-0.2 rounded bg-blue-100 text-blue-900">
-                  NICE DAP
-                </span>
-              </button>
-
-              <div className="h-8 w-px bg-slate-200 hidden sm:block" />
-
-              {/* Reset Button */}
-              <button
-                type="button"
-                onClick={handleResetDefaults}
-                className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-200 transition-colors"
-                title="Reset simulation parameters"
-              >
-                <RefreshCw className="w-3.5 h-3.5" />
-              </button>
-            </div>
-
-            {/* 3. Composite Access Score Pill & ML Service Indicator */}
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-3 bg-slate-50 px-4 py-2.5 rounded-lg border border-slate-200">
-                <div>
-                  <div className="text-[10px] uppercase font-bold text-slate-500">EU-3 Composite Access</div>
+              <div className="flex items-center gap-3">
+                {/* Composite Access Score Pill */}
+                <div className="flex-1 bg-slate-50 px-3 py-2 rounded-lg border border-slate-200">
+                  <div className="text-[11px] text-slate-500">EU-3 composite access</div>
                   <div className="flex items-baseline gap-2 mt-0.5">
-                    <span className="text-2xl font-extrabold font-mono text-[#00205b]">
+                    <span className="text-2xl font-semibold font-mono text-[#00205b]">
                       {simulatedOutput.scores.composite}%
                     </span>
                     <span
-                      className={`text-[10px] px-2 py-0.5 rounded font-bold ${
+                      className={`text-[10px] px-2 py-0.5 rounded-md font-medium ${
                         simulatedOutput.scores.composite >= 70
-                          ? 'bg-emerald-100 text-emerald-800'
-                          : 'bg-amber-100 text-amber-800'
+                          ? 'bg-emerald-50 text-emerald-800'
+                          : 'bg-amber-50 text-amber-800'
                       }`}
                     >
-                      {simulatedOutput.scores.composite >= 70 ? 'Viable' : 'High Friction'}
+                      {simulatedOutput.scores.composite >= 70 ? 'Viable' : 'High friction'}
                     </span>
                   </div>
                 </div>
-              </div>
 
-              {/* ML Backend Indicator Badge */}
-              <div className="hidden sm:flex items-center gap-2 px-3 py-2.5 rounded-lg border border-indigo-200 bg-indigo-50/70 text-indigo-900 text-xs">
-                <Cpu className={`w-4 h-4 ${isMlServerLive ? 'text-emerald-600 animate-pulse' : 'text-indigo-600'}`} />
-                <div className="leading-tight">
-                  <div className="font-bold flex items-center gap-1.5 text-[11px]">
-                    <span>Calibrated Ensemble ML</span>
-                    {isMlServerLive && (
-                      <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" title="FastAPI Server Online" />
-                    )}
-                  </div>
-                  <div className="text-[10px] text-indigo-700 font-mono">
-                    {isMlServerLive ? `FastAPI Live (85.6% CV)` : `RF + HistGB Calibrated`}
+                {/* ML Backend Indicator Badge */}
+                <div className="flex items-center gap-2 px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-slate-700 text-xs">
+                  <Cpu className={`w-4 h-4 ${isMlServerLive ? 'text-emerald-600' : 'text-slate-400'}`} />
+                  <div className="leading-tight">
+                    <div className="font-medium flex items-center gap-1.5 text-[11px]">
+                      <span>Calibrated ensemble ML</span>
+                      {isMlServerLive && (
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" title="FastAPI Server Online" />
+                      )}
+                    </div>
+                    <div className="text-[10px] text-slate-500 font-mono">
+                      {isMlServerLive ? `FastAPI live (85.6% CV)` : `RF + HistGB calibrated`}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -260,16 +294,17 @@ export default function App() {
         </section>
 
         {/* Centerpiece: 3 Country Appraisal Cards */}
-        <section aria-label="National HTA Appraisal Cards">
+        <section data-tour="hta-cards" aria-label="National HTA Appraisal Cards">
           <div className="flex items-center justify-between mb-3 px-1">
             <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-[#00205b]" />
-              <h2 className="text-xs font-bold uppercase tracking-wider text-slate-700 m-0">
-                National HTA Appraisal Cards &bull; Click Any Card to Inspect Full Dossier
+              <ShieldCheck className="w-4 h-4 text-slate-400" />
+              <h2 className="text-sm font-semibold text-slate-800 m-0">
+                National HTA appraisal cards
               </h2>
+              <span className="text-xs text-slate-400">Click a card to inspect the full dossier</span>
             </div>
-            <span className="text-xs text-slate-500">
-              Regulatory appraisal rules calibrated against TA388, G-BA 2021, and CT-15180
+            <span className="text-xs text-slate-400">
+              Calibrated against TA388, G-BA 2021, and CT-15180
             </span>
           </div>
 
@@ -307,7 +342,7 @@ export default function App() {
         </section>
 
         {/* Full-Width Comparative Recharts Visualization */}
-        <section aria-label="Comparative Visualizations">
+        <section data-tour="comparison-chart" aria-label="Comparative Visualizations">
           <ComparisonChart
             activeScenarioKey={selectedScenarioKey}
             simulatedScores={simulatedOutput}
@@ -317,15 +352,16 @@ export default function App() {
         </section>
 
         {/* Bottom Analysis Section: 3 Clean Teaser Cards */}
-        <section aria-label="Evidence & Strategic Blueprints">
+        <section data-tour="evidence-matrix" aria-label="Evidence & Strategic Blueprints">
           <div className="flex items-center justify-between mb-3 px-1">
             <div className="flex items-center gap-2">
-              <Activity className="w-4 h-4 text-[#00205b]" />
-              <h2 className="text-xs font-bold uppercase tracking-wider text-slate-700 m-0">
-                Clinical Evidence & Commercial Playbook &bull; Click to Expand
+              <Activity className="w-4 h-4 text-slate-400" />
+              <h2 className="text-sm font-semibold text-slate-800 m-0">
+                Clinical evidence & commercial playbook
               </h2>
+              <span className="text-xs text-slate-400">Click to expand</span>
             </div>
-            <span className="text-xs text-slate-500">
+            <span className="text-xs text-slate-400">
               ESC Guidelines &bull; IQWiG General Methods &bull; HAS Doctrine
             </span>
           </div>
@@ -382,24 +418,24 @@ export default function App() {
       <footer className="w-full border-t border-slate-200 bg-white py-6 px-6 lg:px-10 mt-8 text-xs text-slate-500">
         <div className="w-full flex flex-col md:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2">
-            <span className="font-bold text-[#00205b]">
+            <span className="font-medium text-slate-700">
               PayerLens &bull; Novo Nordisk Hackathon 2026
             </span>
             <span className="text-slate-300">|</span>
-            <span>Predicting Patient Access Through Payer & Healthcare Ecosystem Intelligence</span>
+            <span>Predicting patient access through payer & healthcare ecosystem intelligence</span>
           </div>
 
           <div className="flex items-center gap-4 text-[11px]">
             <button
               type="button"
               onClick={() => setIsDrawerOpen(true)}
-              className="text-[#004b87] hover:underline font-semibold inline-flex items-center gap-1"
+              className="text-[#004b87] hover:underline font-medium inline-flex items-center gap-1"
             >
               <ShieldCheck className="w-3.5 h-3.5" />
-              <span>Audit Dossier & Citations</span>
+              <span>Audit dossier & citations</span>
             </button>
             <span className="text-slate-300">|</span>
-            <span className="font-mono text-slate-500">Statutory Frameworks Calibrated 2026</span>
+            <span className="text-slate-400">Statutory frameworks calibrated 2026</span>
           </div>
         </div>
       </footer>

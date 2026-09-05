@@ -1,96 +1,77 @@
 import React, { useState } from 'react';
-import { ShieldCheck, Activity, ChevronDown, BookOpen, Calculator } from 'lucide-react';
+import { ShieldCheck, Activity, ChevronDown, BookOpen, Calculator, Compass } from 'lucide-react';
 import ProvenanceBadge from './ProvenanceBadge';
 
-export default function Header({ onOpenDrawer, onOpenMethodology, activeScenario }) {
+export default function Header({ onOpenDrawer, onOpenMethodology, onStartTour, activeScenario }) {
   const [showLegendPopover, setShowLegendPopover] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-[#00205b] text-white shadow-md border-b border-[#001742]">
-      {/* Top micro-bar: Corporate Hackathon metadata */}
-      <div className="border-b border-white/10 bg-[#001742]/50 px-6 lg:px-10 py-1.5 text-[11px] text-blue-100/80">
-        <div className="w-full flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <span className="font-bold tracking-wider text-white uppercase text-[10px] bg-white/10 px-2 py-0.5 rounded">
-              Novo Nordisk Hackathon 2026
-            </span>
-            <span className="text-blue-300/60 hidden sm:inline">|</span>
-            <span className="text-blue-100/90 text-[11px] hidden sm:inline font-medium">
-              Global Health Economics & Outcomes Research (HEOR) &bull; Market Access Ecosystem
-            </span>
-          </div>
-
-          <div className="flex items-center gap-3 text-[11px]">
-            <div className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-400" />
-              <span className="text-emerald-300 font-medium">Audit-Ready Compliance</span>
-            </div>
-            <span className="text-blue-300/60">|</span>
-            <span className="text-blue-200">EU-3 Harmonized (NICE &bull; G-BA &bull; HAS)</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Header Container */}
+    <header className="sticky top-0 z-40 w-full bg-white border-b border-slate-200">
       <div className="w-full px-6 lg:px-10 py-3.5">
         <div className="flex items-center justify-between gap-4">
-          
-          {/* Brand Logo & Title */}
-          <div className="flex items-center gap-3.5">
-            <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-white/10 border border-white/20 shadow-inner flex-shrink-0">
-              <Activity className="w-5 h-5 text-blue-200" />
+
+          {/* Brand */}
+          <div data-tour="brand" className="flex items-center gap-3">
+            <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-[#00205b] flex-shrink-0">
+              <Activity className="w-4.5 h-4.5 text-white" />
             </div>
 
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-xl font-bold tracking-tight text-white m-0">
+                <h1 className="text-base font-semibold tracking-tight text-slate-900 m-0">
                   PayerLens
                 </h1>
-                <span className="text-[10px] px-2 py-0.5 rounded bg-blue-500/20 border border-blue-300/30 text-blue-100 font-mono font-medium">
-                  HEOR Intelligence v2.6
+                <span className="text-[10px] px-1.5 py-0.5 rounded text-slate-400 font-mono">
+                  v2.6
                 </span>
               </div>
-              <p className="text-xs text-blue-100/80 font-normal mt-0.5">
-                Predicting Patient Access Through Payer & Healthcare Ecosystem Intelligence
+              <p className="text-xs text-slate-500 font-normal mt-0.5">
+                Predicting patient access through payer & healthcare ecosystem intelligence
               </p>
             </div>
           </div>
 
-          {/* Action Header Items */}
-          <div className="flex items-center gap-2.5">
-            {/* Number Derivations & Methodology Button */}
+          {/* Actions */}
+          <div className="flex items-center gap-1">
+            <button
+              type="button"
+              onClick={onStartTour}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-slate-100 text-xs text-slate-600 hover:text-slate-900 transition-colors font-medium"
+              title="Take a guided tour of the dashboard"
+            >
+              <Compass className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Take a tour</span>
+            </button>
+
             <button
               type="button"
               onClick={onOpenMethodology}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 border border-white/20 text-xs text-blue-100 transition-colors font-medium"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-slate-100 text-xs text-slate-600 hover:text-slate-900 transition-colors font-medium"
               title="How are these numbers calculated & derived?"
             >
-              <Calculator className="w-3.5 h-3.5 text-blue-200" />
-              <span className="hidden md:inline">How Numbers are Derived</span>
-              <span className="md:hidden">Methodology</span>
+              <Calculator className="w-3.5 h-3.5" />
+              <span>Methodology</span>
             </button>
 
-            {/* Provenance Taxonomy Dropdown */}
             <div className="relative">
               <button
                 type="button"
                 onClick={() => setShowLegendPopover(!showLegendPopover)}
-                className="hidden lg:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 border border-white/20 text-xs text-blue-100 transition-colors"
+                className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-slate-100 text-xs text-slate-600 hover:text-slate-900 transition-colors font-medium"
                 title="View Provenance Taxonomy"
               >
-                <BookOpen className="w-3.5 h-3.5 text-blue-200" />
-                <span className="text-xs font-medium">Citation Taxonomy</span>
-                <ChevronDown className="w-3 h-3 text-blue-200" />
+                <BookOpen className="w-3.5 h-3.5" />
+                <span>Citations</span>
+                <ChevronDown className="w-3 h-3" />
               </button>
 
-              {/* Taxonomy Popover */}
               {showLegendPopover && (
                 <div
-                  className="absolute right-0 top-full mt-2 w-80 rounded-xl p-4 shadow-xl border bg-white border-slate-200 text-slate-800 z-50 text-xs space-y-2.5 animate-fade-in"
+                  className="absolute right-0 top-full mt-2 w-80 rounded-xl p-4 shadow-lg border bg-white border-slate-200 text-slate-800 z-50 text-xs space-y-2.5"
                   onClick={() => setShowLegendPopover(false)}
                 >
-                  <div className="font-bold text-slate-900 text-xs pb-2 border-b border-slate-100">
-                    Scientific & Regulatory Provenance Taxonomy
+                  <div className="font-semibold text-slate-900 text-xs pb-2 border-b border-slate-100">
+                    Source Taxonomy
                   </div>
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
@@ -114,18 +95,15 @@ export default function Header({ onOpenDrawer, onOpenMethodology, activeScenario
               )}
             </div>
 
-            {/* Audit Trail Drawer CTA Button */}
             <button
               id="open-provenance-drawer-btn"
+              data-tour="audit-trail-btn"
               type="button"
               onClick={onOpenDrawer}
-              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-white text-[#00205b] hover:bg-blue-50 text-xs font-bold shadow-xs transition-all border border-white"
+              className="inline-flex items-center gap-2 ml-1.5 px-3.5 py-1.5 rounded-lg bg-[#00205b] text-white hover:bg-[#003380] text-xs font-medium transition-colors"
             >
-              <ShieldCheck className="w-4 h-4 text-[#00205b]" />
-              <span>Audit Trail Dossier</span>
-              <span className="px-1.5 py-0.2 rounded-full bg-blue-100 text-[#00205b] text-[10px] font-mono font-bold">
-                12 Sources
-              </span>
+              <ShieldCheck className="w-3.5 h-3.5" />
+              <span>Audit Trail</span>
             </button>
           </div>
 

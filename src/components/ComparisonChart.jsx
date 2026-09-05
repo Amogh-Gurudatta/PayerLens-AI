@@ -93,6 +93,43 @@ export default function ComparisonChart({
     });
   }
 
+  // Custom benchmark label plate with opaque background to prevent collision with tall bars (Item 3)
+  const renderBenchmarkPlate = (props) => {
+    const { viewBox } = props;
+    if (!viewBox) return null;
+    const { x, y, width } = viewBox;
+    const plateWidth = 285;
+    const plateHeight = 22;
+    // Position on right margin slightly above the 70% line
+    const posX = Math.max(x + width - plateWidth - 8, x + 4);
+    const posY = y - plateHeight - 3;
+    return (
+      <g className="pointer-events-none select-none">
+        <rect
+          x={posX}
+          y={posY}
+          width={plateWidth}
+          height={plateHeight}
+          rx={4}
+          fill="#ffffff"
+          stroke="#b45309"
+          strokeWidth={1.2}
+          fillOpacity={0.98}
+        />
+        <text
+          x={posX + 8}
+          y={posY + 15}
+          fill="#92400e"
+          fontSize={11}
+          fontWeight={700}
+          fontFamily="system-ui, -apple-system, sans-serif"
+        >
+          70% HTA Viability Benchmark [Consensus Precedent]
+        </text>
+      </g>
+    );
+  };
+
   // Clinical white tooltip
   const CustomBarTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
@@ -128,17 +165,17 @@ export default function ComparisonChart({
   };
 
   return (
-    <div className="pharma-card rounded-xl p-6 shadow-sm flex flex-col justify-between">
+    <div className="pharma-card rounded-xl p-6 flex flex-col justify-between">
       {/* Chart Top Header & View Modes */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100 mb-4">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center text-[#00205b]">
+          <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-[#00205b]">
             <BarChart3 className="w-4 h-4" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider m-0">
-                Payer Viability & Access Simulation
+              <h3 className="text-sm font-semibold text-slate-900 m-0">
+                Payer viability & access simulation
               </h3>
               <ProvenanceTooltip
                 title="70% HTA Viability Benchmark Reference"
@@ -157,39 +194,39 @@ export default function ComparisonChart({
         </div>
 
         {/* View Mode Toggle Buttons */}
-        <div className="flex items-center p-1 rounded-lg bg-slate-100 border border-slate-200 self-start sm:self-auto text-xs">
+        <div className="flex items-center p-1 rounded-lg bg-slate-100 self-start sm:self-auto text-xs">
           <button
             type="button"
             onClick={() => setViewMode('country-bar')}
-            className={`px-3 py-1.5 rounded-md font-semibold transition-all ${
+            className={`px-3 py-1.5 rounded-md font-medium transition-colors ${
               viewMode === 'country-bar'
-                ? 'bg-white text-[#00205b] shadow-xs'
+                ? 'bg-white text-[#00205b] shadow-sm'
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            Active Scenario
+            Active scenario
           </button>
           <button
             type="button"
             onClick={() => setViewMode('cross-scenario')}
-            className={`px-3 py-1.5 rounded-md font-semibold transition-all ${
+            className={`px-3 py-1.5 rounded-md font-medium transition-colors ${
               viewMode === 'cross-scenario'
-                ? 'bg-white text-[#00205b] shadow-xs'
+                ? 'bg-white text-[#00205b] shadow-sm'
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            All Drug Precedents
+            All drug precedents
           </button>
           <button
             type="button"
             onClick={() => setViewMode('price-curve')}
-            className={`px-3 py-1.5 rounded-md font-semibold transition-all ${
+            className={`px-3 py-1.5 rounded-md font-medium transition-colors ${
               viewMode === 'price-curve'
-                ? 'bg-white text-[#00205b] shadow-xs'
+                ? 'bg-white text-[#00205b] shadow-sm'
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            Price Sensitivity
+            Price sensitivity
           </button>
         </div>
       </div>
@@ -215,19 +252,13 @@ export default function ComparisonChart({
               />
               <Tooltip content={<CustomBarTooltip />} />
 
-              {/* 70% Benchmark Reference Line */}
+              {/* 70% Benchmark Reference Line with Opaque Background Plate to prevent bar collision */}
               <ReferenceLine
                 y={70}
                 stroke="#b45309"
                 strokeDasharray="5 5"
                 strokeWidth={2}
-                label={{
-                  value: '70% HTA Viability Benchmark [Consensus Precedent]',
-                  position: 'insideTopRight',
-                  fill: '#b45309',
-                  fontSize: 11,
-                  fontWeight: 700
-                }}
+                label={renderBenchmarkPlate}
               />
 
               <Bar dataKey="score" radius={[6, 6, 0, 0]} maxBarSize={56}>

@@ -58,6 +58,28 @@ export default function ControlsPanel({
             </span>
           </div>
 
+          {/* Responsive chip grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-1.5 mb-2">
+            {Object.keys(SCENARIOS).map((key) => {
+              const sc = SCENARIOS[key];
+              const isSelected = selectedScenarioKey === key;
+              return (
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => onSelectScenario(key)}
+                  className={`text-[11px] px-2 py-1.5 rounded-lg font-medium transition-all text-center ${
+                    isSelected
+                      ? 'bg-cyan-500 text-slate-950 font-bold'
+                      : 'bg-slate-900/80 text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-800'
+                  }`}
+                >
+                  {sc.code}
+                </button>
+              );
+            })}
+          </div>
+
           <div className="relative">
             <select
               id="scenario-selector"
