@@ -44,14 +44,19 @@ export default function App() {
       if (!scenario) return;
 
       const res = await getMLPrediction({
-        icer_band: scenario.icer_band ?? 0,
-        direct_comparator: scenario.direct_comparator ?? 1,
+        icer_band: scenario.icer_band ?? (['D', 'C'].includes(scenario.id) ? 0 : scenario.id === 'B' ? 1 : 2),
+        direct_comparator: scenario.direct_comparator ?? (['D', 'C', 'B'].includes(scenario.id) ? 1 : 0),
         hr_mortality: scenario.clinicalHR ?? 0.74,
-        hosp_reduction: 25.0,
+        hosp_reduction: scenario.id === 'D' ? 32.0 : scenario.id === 'C' ? 29.0 : scenario.id === 'B' ? 26.0 : scenario.id === 'E' ? 21.0 : 12.0,
         biomarker_defined: scenario.id === 'D' ? 1 : 0,
-        budget_impact_m: 20.0,
-        unmet_need: 4,
+        budget_impact_m: scenario.id === 'D' ? 15.0 : scenario.id === 'C' ? 22.0 : scenario.id === 'B' ? 35.0 : scenario.id === 'E' ? 10.0 : 85.0,
+        unmet_need: scenario.id === 'E' ? 5 : scenario.id === 'A' ? 2 : 4,
         orphan_status: 0,
+        qol_improvement: ['D', 'C', 'B'].includes(scenario.id) ? 1 : 0,
+        evidence_grade: ['D', 'C', 'B'].includes(scenario.id) ? 3 : 2,
+        prespecified_subgroup: scenario.id === 'A' ? 0 : 1,
+        safety_tolerability: ['D', 'C'].includes(scenario.id) ? 3 : 2,
+        cost_ratio_soc: scenario.id === 'D' ? 1.6 : scenario.id === 'C' ? 1.8 : scenario.id === 'B' ? 2.2 : scenario.id === 'E' ? 2.8 : 3.5,
       });
 
       if (isMounted) {
@@ -239,13 +244,13 @@ export default function App() {
                 <Cpu className={`w-4 h-4 ${isMlServerLive ? 'text-emerald-600 animate-pulse' : 'text-indigo-600'}`} />
                 <div className="leading-tight">
                   <div className="font-bold flex items-center gap-1.5 text-[11px]">
-                    <span>Random Forest ML Model</span>
+                    <span>Calibrated Ensemble ML</span>
                     {isMlServerLive && (
                       <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" title="FastAPI Server Online" />
                     )}
                   </div>
                   <div className="text-[10px] text-indigo-700 font-mono">
-                    {isMlServerLive ? `FastAPI Live (84% Acc)` : `Scikit-Learn Calibrated`}
+                    {isMlServerLive ? `FastAPI Live (85.6% CV)` : `RF + HistGB Calibrated`}
                   </div>
                 </div>
               </div>
