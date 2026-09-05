@@ -1,0 +1,122 @@
+drug_name,indication,country,icer_band,direct_comparator,hr_mortality,hosp_reduction,biomarker_defined,budget_impact_m,unmet_need,orphan_status,outcome_label,source_url,citation_id,provenance_badge
+Sacubitril / Valsartan (Entresto),"Symptomatic Chronic Heart Failure (HFrEF, LVEF <= 35%)",UK,1,1,0.8,21.0,0,35.0,4,0,1,https://www.nice.org.uk/guidance/ta388,NICE-TA388-2016,STATUTORY
+Dapagliflozin (Forxiga),Symptomatic Chronic HFrEF (DAPA-HF),UK,0,1,0.82,30.0,0,18.5,4,0,2,https://www.nice.org.uk/guidance/ta665,NICE-TA665-2020,STATUTORY
+Empagliflozin (Jardiance),Symptomatic Chronic HFrEF (EMPEROR-Reduced),UK,0,1,0.92,31.0,0,19.0,4,0,2,https://www.nice.org.uk/guidance/ta730,NICE-TA730-2021,STATUTORY
+Vericiguat (Verquvo),Symptomatic Chronic HF post recent decompensation event,UK,2,0,0.9,10.0,0,12.0,5,0,1,https://www.nice.org.uk/guidance/ta797,NICE-TA797-2022,STATUTORY
+Ivabradine (Procoralan),Chronic Heart Failure NYHA II-IV with sinus rhythm >= 75 bpm,UK,1,1,0.91,26.0,1,14.0,3,0,1,https://www.nice.org.uk/guidance/ta267,NICE-TA267-2012,STATUTORY
+Inotuzumab Ozogamicin,Relapsed/Refractory ALL,UK,3,0,0.77,0.0,1,28.0,5,1,0,https://www.nice.org.uk/guidance/ta517,NICE-TA517-2018,STATUTORY
+Sacubitril / Valsartan (Entresto),Symptomatic Chronic HFrEF (NYHA II-IV),DE,0,1,0.8,21.0,0,85.0,4,0,2,https://www.g-ba.de/beschluesse/2684/,G-BA-BAnz-AT-01.09.2016-B3,STATUTORY
+Dapagliflozin (Forxiga),Symptomatic Chronic HFrEF,DE,0,1,0.82,30.0,0,45.0,4,0,2,https://www.g-ba.de/beschluesse/4925/,G-BA-BAnz-AT-29.06.2021-B4,STATUTORY
+Empagliflozin (Jardiance),Symptomatic Chronic HFrEF,DE,0,1,0.92,31.0,0,48.0,4,0,2,https://www.g-ba.de/beschluesse/5210/,G-BA-BAnz-AT-16.12.2021-B3,STATUTORY
+Vericiguat (Verquvo),Symptomatic Chronic HF after recent decompensation,DE,0,0,0.9,10.0,0,22.0,5,0,1,https://www.g-ba.de/beschluesse/5392/,G-BA-BAnz-AT-05.05.2022-B3,STATUTORY
+Alirocumab (Praluent),Hypercholesterolemia / High CV Risk,DE,0,0,0.85,5.0,1,60.0,3,0,0,https://www.g-ba.de/beschluesse/2712/,G-BA-BAnz-AT-20.10.2016-B4,STATUTORY
+Sacubitril / Valsartan (Entresto),Insuffisance cardiaque chronique symptomatique (HFrEF),FR,0,1,0.8,21.0,0,70.0,4,0,1,https://www.has-sante.fr/jcms/c_2626573/en/entresto-sacubitril-valsartan,HAS-CT-15180-2016,STATUTORY
+Dapagliflozin (Forxiga),Insuffisance cardiaque chronique symptomatique (DAPA-HF),FR,0,1,0.82,30.0,0,38.0,4,0,2,https://www.has-sante.fr/jcms/p_3283291/fr/forxiga-dapagliflozine-insuffisance-cardiaque,HAS-CT-19204-2021,STATUTORY
+Empagliflozin (Jardiance),Insuffisance cardiaque chronique symptomatique,FR,0,1,0.92,31.0,0,40.0,4,0,2,https://www.has-sante.fr/jcms/p_3311204/fr/jardiance-empagliflozine-insuffisance-cardiaque,HAS-CT-19512-2022,STATUTORY
+Vericiguat (Verquvo),Insuffisance cardiaque chronique après décompensation,FR,0,0,0.9,10.0,0,18.0,5,0,1,https://www.has-sante.fr/jcms/p_3345821/fr/verquvo-vericiguat,HAS-CT-19854-2022,STATUTORY
+Fenofibrate,Hypercholesterolemia secondary prevention,FR,0,0,0.98,0.0,0,12.0,2,0,0,https://www.has-sante.fr/jcms/c_1752041/fr/fenofibrate,HAS-CT-13490-2014,STATUTORY
+Investigational Molecule A1,Cardiovascular / Metabolic Condition Type 1,DE,0,0,0.76,6.6,0,78.6,2,0,0,https://www.g-ba.de/beschluesse/4000/,HTA-SYNTH-DE-2024-100,MODELLED_ESTIMATE
+Investigational Molecule B1,Cardiovascular / Metabolic Condition Type 2,DE,0,1,0.78,9.9,0,20.6,4,0,2,https://www.g-ba.de/beschluesse/4001/,HTA-SYNTH-DE-2024-101,MODELLED_ESTIMATE
+Investigational Molecule C1,Cardiovascular / Metabolic Condition Type 3,UK,1,1,0.76,12.9,0,36.1,4,0,2,https://www.nice.org.uk/guidance/ta302,HTA-SYNTH-UK-2024-102,MODELLED_ESTIMATE
+Investigational Molecule D1,Cardiovascular / Metabolic Condition Type 4,FR,0,1,0.71,27.6,1,10.5,1,0,2,https://www.has-sante.fr/jcms/p_3000003/fr/,HTA-SYNTH-FR-2024-103,MODELLED_ESTIMATE
+Investigational Molecule E1,Cardiovascular / Metabolic Condition Type 5,FR,0,0,0.9,16.9,0,15.4,1,0,0,https://www.has-sante.fr/jcms/p_3000004/fr/,HTA-SYNTH-FR-2024-104,MODELLED_ESTIMATE
+Investigational Molecule F1,Cardiovascular / Metabolic Condition Type 1,DE,0,0,0.66,32.8,1,51.5,4,0,1,https://www.g-ba.de/beschluesse/4005/,HTA-SYNTH-DE-2024-105,MODELLED_ESTIMATE
+Investigational Molecule G1,Cardiovascular / Metabolic Condition Type 2,UK,0,0,0.88,29.9,0,12.5,5,0,1,https://www.nice.org.uk/guidance/ta306,HTA-SYNTH-UK-2024-106,MODELLED_ESTIMATE
+Investigational Molecule H1,Cardiovascular / Metabolic Condition Type 3,UK,0,1,0.66,29.2,1,51.1,4,0,2,https://www.nice.org.uk/guidance/ta307,HTA-SYNTH-UK-2024-107,MODELLED_ESTIMATE
+Investigational Molecule I1,Cardiovascular / Metabolic Condition Type 4,FR,0,0,0.6,37.2,1,65.1,2,0,1,https://www.has-sante.fr/jcms/p_3000008/fr/,HTA-SYNTH-FR-2024-108,MODELLED_ESTIMATE
+Investigational Molecule J1,Cardiovascular / Metabolic Condition Type 5,FR,0,1,0.94,21.8,0,33.1,2,0,1,https://www.has-sante.fr/jcms/p_3000009/fr/,HTA-SYNTH-FR-2024-109,MODELLED_ESTIMATE
+Investigational Molecule K1,Cardiovascular / Metabolic Condition Type 1,UK,2,1,0.76,32.1,1,15.2,4,0,1,https://www.nice.org.uk/guidance/ta310,HTA-SYNTH-UK-2024-110,MODELLED_ESTIMATE
+Investigational Molecule L1,Cardiovascular / Metabolic Condition Type 2,FR,0,0,0.83,5.7,0,14.2,3,0,1,https://www.has-sante.fr/jcms/p_3000011/fr/,HTA-SYNTH-FR-2024-111,MODELLED_ESTIMATE
+Investigational Molecule M1,Cardiovascular / Metabolic Condition Type 3,UK,0,1,0.78,16.1,0,69.2,5,0,2,https://www.nice.org.uk/guidance/ta312,HTA-SYNTH-UK-2024-112,MODELLED_ESTIMATE
+Investigational Molecule N1,Cardiovascular / Metabolic Condition Type 4,UK,0,1,0.71,38.1,1,73.3,4,0,2,https://www.nice.org.uk/guidance/ta313,HTA-SYNTH-UK-2024-113,MODELLED_ESTIMATE
+Investigational Molecule O1,Cardiovascular / Metabolic Condition Type 5,FR,0,0,0.75,11.2,0,41.3,3,0,1,https://www.has-sante.fr/jcms/p_3000014/fr/,HTA-SYNTH-FR-2024-114,MODELLED_ESTIMATE
+Investigational Molecule P1,Cardiovascular / Metabolic Condition Type 1,FR,0,1,0.78,8.2,0,33.7,3,0,1,https://www.has-sante.fr/jcms/p_3000015/fr/,HTA-SYNTH-FR-2024-115,MODELLED_ESTIMATE
+Investigational Molecule Q1,Cardiovascular / Metabolic Condition Type 2,FR,0,1,0.77,39.4,1,26.4,3,0,1,https://www.has-sante.fr/jcms/p_3000016/fr/,HTA-SYNTH-FR-2024-116,MODELLED_ESTIMATE
+Investigational Molecule R1,Cardiovascular / Metabolic Condition Type 3,DE,0,1,0.69,25.8,1,28.7,4,1,2,https://www.g-ba.de/beschluesse/4017/,HTA-SYNTH-DE-2024-117,MODELLED_ESTIMATE
+Investigational Molecule S1,Cardiovascular / Metabolic Condition Type 4,FR,0,1,0.64,35.1,1,69.7,5,0,2,https://www.has-sante.fr/jcms/p_3000018/fr/,HTA-SYNTH-FR-2024-118,MODELLED_ESTIMATE
+Investigational Molecule T1,Cardiovascular / Metabolic Condition Type 5,UK,0,1,0.86,7.4,0,76.0,4,0,1,https://www.nice.org.uk/guidance/ta319,HTA-SYNTH-UK-2024-119,MODELLED_ESTIMATE
+Investigational Molecule U1,Cardiovascular / Metabolic Condition Type 1,UK,0,1,0.69,28.4,1,59.8,1,0,2,https://www.nice.org.uk/guidance/ta320,HTA-SYNTH-UK-2024-120,MODELLED_ESTIMATE
+Investigational Molecule V1,Cardiovascular / Metabolic Condition Type 2,DE,0,0,0.75,30.0,0,79.6,3,0,0,https://www.g-ba.de/beschluesse/4021/,HTA-SYNTH-DE-2024-121,MODELLED_ESTIMATE
+Investigational Molecule W1,Cardiovascular / Metabolic Condition Type 3,UK,3,0,0.78,7.5,0,81.3,3,0,0,https://www.nice.org.uk/guidance/ta322,HTA-SYNTH-UK-2024-122,MODELLED_ESTIMATE
+Investigational Molecule X1,Cardiovascular / Metabolic Condition Type 4,DE,0,1,0.76,36.7,1,59.6,5,0,2,https://www.g-ba.de/beschluesse/4023/,HTA-SYNTH-DE-2024-123,MODELLED_ESTIMATE
+Investigational Molecule Y1,Cardiovascular / Metabolic Condition Type 5,UK,0,0,0.62,35.0,1,5.4,1,0,2,https://www.nice.org.uk/guidance/ta324,HTA-SYNTH-UK-2024-124,MODELLED_ESTIMATE
+Investigational Molecule Z1,Cardiovascular / Metabolic Condition Type 1,DE,0,0,0.78,13.8,0,68.5,4,0,0,https://www.g-ba.de/beschluesse/4025/,HTA-SYNTH-DE-2024-125,MODELLED_ESTIMATE
+Investigational Molecule A2,Cardiovascular / Metabolic Condition Type 2,DE,0,0,0.82,12.2,0,25.7,1,0,0,https://www.g-ba.de/beschluesse/4026/,HTA-SYNTH-DE-2024-126,MODELLED_ESTIMATE
+Investigational Molecule B2,Cardiovascular / Metabolic Condition Type 3,FR,0,0,0.85,20.6,0,46.9,4,0,1,https://www.has-sante.fr/jcms/p_3000027/fr/,HTA-SYNTH-FR-2024-127,MODELLED_ESTIMATE
+Investigational Molecule C2,Cardiovascular / Metabolic Condition Type 4,UK,3,1,0.77,30.4,0,86.1,4,1,0,https://www.nice.org.uk/guidance/ta328,HTA-SYNTH-UK-2024-128,MODELLED_ESTIMATE
+Investigational Molecule D2,Cardiovascular / Metabolic Condition Type 5,DE,0,0,0.77,37.8,1,30.0,5,0,1,https://www.g-ba.de/beschluesse/4029/,HTA-SYNTH-DE-2024-129,MODELLED_ESTIMATE
+Investigational Molecule E2,Cardiovascular / Metabolic Condition Type 1,DE,0,1,0.96,23.8,0,53.5,3,0,1,https://www.g-ba.de/beschluesse/4030/,HTA-SYNTH-DE-2024-130,MODELLED_ESTIMATE
+Investigational Molecule F2,Cardiovascular / Metabolic Condition Type 2,UK,2,0,0.95,25.0,0,64.2,3,0,0,https://www.nice.org.uk/guidance/ta331,HTA-SYNTH-UK-2024-131,MODELLED_ESTIMATE
+Investigational Molecule G2,Cardiovascular / Metabolic Condition Type 3,DE,0,0,0.76,32.7,1,47.6,5,0,1,https://www.g-ba.de/beschluesse/4032/,HTA-SYNTH-DE-2024-132,MODELLED_ESTIMATE
+Investigational Molecule H2,Cardiovascular / Metabolic Condition Type 4,FR,0,0,0.81,15.1,0,13.0,5,0,1,https://www.has-sante.fr/jcms/p_3000033/fr/,HTA-SYNTH-FR-2024-133,MODELLED_ESTIMATE
+Investigational Molecule I2,Cardiovascular / Metabolic Condition Type 5,DE,0,1,0.71,25.5,1,8.2,2,0,2,https://www.g-ba.de/beschluesse/4034/,HTA-SYNTH-DE-2024-134,MODELLED_ESTIMATE
+Investigational Molecule J2,Cardiovascular / Metabolic Condition Type 1,FR,0,1,0.78,21.8,0,12.3,4,0,2,https://www.has-sante.fr/jcms/p_3000035/fr/,HTA-SYNTH-FR-2024-135,MODELLED_ESTIMATE
+Investigational Molecule K2,Cardiovascular / Metabolic Condition Type 2,UK,2,1,0.97,18.9,0,32.5,4,0,1,https://www.nice.org.uk/guidance/ta336,HTA-SYNTH-UK-2024-136,MODELLED_ESTIMATE
+Investigational Molecule L2,Cardiovascular / Metabolic Condition Type 3,UK,0,1,0.94,23.8,0,39.8,5,1,1,https://www.nice.org.uk/guidance/ta337,HTA-SYNTH-UK-2024-137,MODELLED_ESTIMATE
+Investigational Molecule M2,Cardiovascular / Metabolic Condition Type 4,UK,1,1,0.65,39.3,1,67.7,4,0,2,https://www.nice.org.uk/guidance/ta338,HTA-SYNTH-UK-2024-138,MODELLED_ESTIMATE
+Investigational Molecule N2,Cardiovascular / Metabolic Condition Type 5,DE,0,1,0.72,8.1,0,8.9,4,0,2,https://www.g-ba.de/beschluesse/4039/,HTA-SYNTH-DE-2024-139,MODELLED_ESTIMATE
+Investigational Molecule O2,Cardiovascular / Metabolic Condition Type 1,UK,1,0,0.85,17.8,0,19.7,1,0,1,https://www.nice.org.uk/guidance/ta340,HTA-SYNTH-UK-2024-140,MODELLED_ESTIMATE
+Investigational Molecule P2,Cardiovascular / Metabolic Condition Type 2,DE,0,0,0.88,18.6,0,77.8,3,1,0,https://www.g-ba.de/beschluesse/4041/,HTA-SYNTH-DE-2024-141,MODELLED_ESTIMATE
+Investigational Molecule Q2,Cardiovascular / Metabolic Condition Type 3,DE,0,1,0.71,39.1,1,53.9,1,0,2,https://www.g-ba.de/beschluesse/4042/,HTA-SYNTH-DE-2024-142,MODELLED_ESTIMATE
+Investigational Molecule R2,Cardiovascular / Metabolic Condition Type 4,DE,0,1,0.82,31.0,0,82.0,5,0,2,https://www.g-ba.de/beschluesse/4043/,HTA-SYNTH-DE-2024-143,MODELLED_ESTIMATE
+Investigational Molecule S2,Cardiovascular / Metabolic Condition Type 5,UK,2,1,0.72,26.1,1,32.1,1,1,1,https://www.nice.org.uk/guidance/ta344,HTA-SYNTH-UK-2024-144,MODELLED_ESTIMATE
+Investigational Molecule T2,Cardiovascular / Metabolic Condition Type 1,UK,2,1,0.88,28.7,0,67.5,4,1,1,https://www.nice.org.uk/guidance/ta345,HTA-SYNTH-UK-2024-145,MODELLED_ESTIMATE
+Investigational Molecule U2,Cardiovascular / Metabolic Condition Type 2,UK,0,0,0.67,30.6,1,71.0,5,0,2,https://www.nice.org.uk/guidance/ta346,HTA-SYNTH-UK-2024-146,MODELLED_ESTIMATE
+Investigational Molecule V2,Cardiovascular / Metabolic Condition Type 3,FR,0,1,0.75,29.4,0,47.9,4,0,2,https://www.has-sante.fr/jcms/p_3000047/fr/,HTA-SYNTH-FR-2024-147,MODELLED_ESTIMATE
+Investigational Molecule W2,Cardiovascular / Metabolic Condition Type 4,FR,0,0,0.76,26.4,1,32.1,1,0,1,https://www.has-sante.fr/jcms/p_3000048/fr/,HTA-SYNTH-FR-2024-148,MODELLED_ESTIMATE
+Investigational Molecule X2,Cardiovascular / Metabolic Condition Type 5,FR,0,1,0.8,13.9,0,62.2,3,0,1,https://www.has-sante.fr/jcms/p_3000049/fr/,HTA-SYNTH-FR-2024-149,MODELLED_ESTIMATE
+Investigational Molecule Y2,Cardiovascular / Metabolic Condition Type 1,FR,0,0,0.73,19.8,0,42.5,3,1,1,https://www.has-sante.fr/jcms/p_3000050/fr/,HTA-SYNTH-FR-2024-150,MODELLED_ESTIMATE
+Investigational Molecule Z2,Cardiovascular / Metabolic Condition Type 2,FR,0,1,0.88,7.7,0,12.1,4,0,1,https://www.has-sante.fr/jcms/p_3000051/fr/,HTA-SYNTH-FR-2024-151,MODELLED_ESTIMATE
+Investigational Molecule A3,Cardiovascular / Metabolic Condition Type 3,FR,0,0,0.62,39.8,1,36.8,1,0,1,https://www.has-sante.fr/jcms/p_3000052/fr/,HTA-SYNTH-FR-2024-152,MODELLED_ESTIMATE
+Investigational Molecule B3,Cardiovascular / Metabolic Condition Type 4,DE,0,0,0.82,7.3,0,71.1,4,0,0,https://www.g-ba.de/beschluesse/4053/,HTA-SYNTH-DE-2024-153,MODELLED_ESTIMATE
+Investigational Molecule C3,Cardiovascular / Metabolic Condition Type 5,DE,0,0,0.72,17.7,0,9.8,3,1,0,https://www.g-ba.de/beschluesse/4054/,HTA-SYNTH-DE-2024-154,MODELLED_ESTIMATE
+Investigational Molecule D3,Cardiovascular / Metabolic Condition Type 1,UK,2,0,0.77,30.6,1,29.3,3,0,1,https://www.nice.org.uk/guidance/ta355,HTA-SYNTH-UK-2024-155,MODELLED_ESTIMATE
+Investigational Molecule E3,Cardiovascular / Metabolic Condition Type 2,UK,0,1,0.95,19.2,0,89.4,1,0,1,https://www.nice.org.uk/guidance/ta356,HTA-SYNTH-UK-2024-156,MODELLED_ESTIMATE
+Investigational Molecule F3,Cardiovascular / Metabolic Condition Type 3,DE,0,1,0.84,21.9,0,54.7,4,0,2,https://www.g-ba.de/beschluesse/4057/,HTA-SYNTH-DE-2024-157,MODELLED_ESTIMATE
+Investigational Molecule G3,Cardiovascular / Metabolic Condition Type 4,FR,0,1,0.68,34.3,1,28.6,5,0,2,https://www.has-sante.fr/jcms/p_3000058/fr/,HTA-SYNTH-FR-2024-158,MODELLED_ESTIMATE
+Investigational Molecule H3,Cardiovascular / Metabolic Condition Type 5,UK,1,1,0.97,31.6,0,64.3,1,0,1,https://www.nice.org.uk/guidance/ta359,HTA-SYNTH-UK-2024-159,MODELLED_ESTIMATE
+Investigational Molecule I3,Cardiovascular / Metabolic Condition Type 1,UK,1,0,0.93,30.6,0,66.7,5,0,1,https://www.nice.org.uk/guidance/ta360,HTA-SYNTH-UK-2024-160,MODELLED_ESTIMATE
+Investigational Molecule J3,Cardiovascular / Metabolic Condition Type 2,DE,0,0,0.82,26.9,0,88.9,1,1,0,https://www.g-ba.de/beschluesse/4061/,HTA-SYNTH-DE-2024-161,MODELLED_ESTIMATE
+Investigational Molecule K3,Cardiovascular / Metabolic Condition Type 3,UK,0,1,0.94,17.7,0,40.3,4,0,1,https://www.nice.org.uk/guidance/ta362,HTA-SYNTH-UK-2024-162,MODELLED_ESTIMATE
+Investigational Molecule L3,Cardiovascular / Metabolic Condition Type 4,UK,2,0,0.86,25.8,0,85.3,5,0,1,https://www.nice.org.uk/guidance/ta363,HTA-SYNTH-UK-2024-163,MODELLED_ESTIMATE
+Investigational Molecule M3,Cardiovascular / Metabolic Condition Type 5,UK,1,1,0.78,23.1,0,57.5,4,0,2,https://www.nice.org.uk/guidance/ta364,HTA-SYNTH-UK-2024-164,MODELLED_ESTIMATE
+Investigational Molecule N3,Cardiovascular / Metabolic Condition Type 1,UK,2,1,0.94,19.9,0,52.7,3,0,0,https://www.nice.org.uk/guidance/ta365,HTA-SYNTH-UK-2024-165,MODELLED_ESTIMATE
+Investigational Molecule O3,Cardiovascular / Metabolic Condition Type 2,DE,0,1,0.73,28.2,1,16.6,4,0,2,https://www.g-ba.de/beschluesse/4066/,HTA-SYNTH-DE-2024-166,MODELLED_ESTIMATE
+Investigational Molecule P3,Cardiovascular / Metabolic Condition Type 3,UK,2,1,0.96,14.4,0,48.7,3,0,0,https://www.nice.org.uk/guidance/ta367,HTA-SYNTH-UK-2024-167,MODELLED_ESTIMATE
+Investigational Molecule Q3,Cardiovascular / Metabolic Condition Type 4,DE,0,0,0.96,18.3,0,27.0,2,0,0,https://www.g-ba.de/beschluesse/4068/,HTA-SYNTH-DE-2024-168,MODELLED_ESTIMATE
+Investigational Molecule R3,Cardiovascular / Metabolic Condition Type 5,DE,0,1,0.78,7.0,0,16.0,4,0,2,https://www.g-ba.de/beschluesse/4069/,HTA-SYNTH-DE-2024-169,MODELLED_ESTIMATE
+Investigational Molecule S3,Cardiovascular / Metabolic Condition Type 1,UK,1,1,0.66,38.5,1,45.3,2,0,2,https://www.nice.org.uk/guidance/ta370,HTA-SYNTH-UK-2024-170,MODELLED_ESTIMATE
+Investigational Molecule T3,Cardiovascular / Metabolic Condition Type 2,UK,1,1,0.63,26.3,1,15.3,2,0,2,https://www.nice.org.uk/guidance/ta371,HTA-SYNTH-UK-2024-171,MODELLED_ESTIMATE
+Investigational Molecule U3,Cardiovascular / Metabolic Condition Type 3,UK,2,1,0.93,22.0,0,11.9,1,0,0,https://www.nice.org.uk/guidance/ta372,HTA-SYNTH-UK-2024-172,MODELLED_ESTIMATE
+Investigational Molecule V3,Cardiovascular / Metabolic Condition Type 4,FR,0,1,0.63,28.1,1,36.5,4,0,2,https://www.has-sante.fr/jcms/p_3000073/fr/,HTA-SYNTH-FR-2024-173,MODELLED_ESTIMATE
+Investigational Molecule W3,Cardiovascular / Metabolic Condition Type 5,DE,0,1,0.73,11.8,0,65.6,4,0,2,https://www.g-ba.de/beschluesse/4074/,HTA-SYNTH-DE-2024-174,MODELLED_ESTIMATE
+Investigational Molecule X3,Cardiovascular / Metabolic Condition Type 1,FR,0,1,0.86,11.5,0,27.9,3,1,1,https://www.has-sante.fr/jcms/p_3000075/fr/,HTA-SYNTH-FR-2024-175,MODELLED_ESTIMATE
+Investigational Molecule Y3,Cardiovascular / Metabolic Condition Type 2,DE,0,1,0.62,38.4,1,55.5,3,0,2,https://www.g-ba.de/beschluesse/4076/,HTA-SYNTH-DE-2024-176,MODELLED_ESTIMATE
+Investigational Molecule Z3,Cardiovascular / Metabolic Condition Type 3,DE,0,1,0.87,25.1,0,41.7,3,1,1,https://www.g-ba.de/beschluesse/4077/,HTA-SYNTH-DE-2024-177,MODELLED_ESTIMATE
+Investigational Molecule A4,Cardiovascular / Metabolic Condition Type 4,UK,0,1,0.66,39.8,1,56.5,3,0,2,https://www.nice.org.uk/guidance/ta378,HTA-SYNTH-UK-2024-178,MODELLED_ESTIMATE
+Investigational Molecule B4,Cardiovascular / Metabolic Condition Type 5,UK,0,1,0.65,27.6,1,81.2,2,0,2,https://www.nice.org.uk/guidance/ta379,HTA-SYNTH-UK-2024-179,MODELLED_ESTIMATE
+Investigational Molecule C4,Cardiovascular / Metabolic Condition Type 1,DE,0,0,0.97,28.4,0,74.5,3,1,0,https://www.g-ba.de/beschluesse/4080/,HTA-SYNTH-DE-2024-180,MODELLED_ESTIMATE
+Investigational Molecule D4,Cardiovascular / Metabolic Condition Type 2,UK,0,0,0.7,29.2,1,70.4,3,0,2,https://www.nice.org.uk/guidance/ta381,HTA-SYNTH-UK-2024-181,MODELLED_ESTIMATE
+Investigational Molecule E4,Cardiovascular / Metabolic Condition Type 3,UK,0,1,0.88,12.8,0,54.4,2,0,1,https://www.nice.org.uk/guidance/ta382,HTA-SYNTH-UK-2024-182,MODELLED_ESTIMATE
+Investigational Molecule F4,Cardiovascular / Metabolic Condition Type 4,DE,0,1,0.74,31.7,0,32.4,2,0,2,https://www.g-ba.de/beschluesse/4083/,HTA-SYNTH-DE-2024-183,MODELLED_ESTIMATE
+Investigational Molecule G4,Cardiovascular / Metabolic Condition Type 5,FR,0,0,0.68,31.2,1,34.7,3,0,1,https://www.has-sante.fr/jcms/p_3000084/fr/,HTA-SYNTH-FR-2024-184,MODELLED_ESTIMATE
+Investigational Molecule H4,Cardiovascular / Metabolic Condition Type 1,FR,0,0,0.96,9.9,0,10.7,4,0,1,https://www.has-sante.fr/jcms/p_3000085/fr/,HTA-SYNTH-FR-2024-185,MODELLED_ESTIMATE
+Investigational Molecule I4,Cardiovascular / Metabolic Condition Type 2,FR,0,0,0.77,9.4,0,19.0,4,0,1,https://www.has-sante.fr/jcms/p_3000086/fr/,HTA-SYNTH-FR-2024-186,MODELLED_ESTIMATE
+Investigational Molecule J4,Cardiovascular / Metabolic Condition Type 3,FR,0,1,0.82,27.0,0,42.3,5,0,2,https://www.has-sante.fr/jcms/p_3000087/fr/,HTA-SYNTH-FR-2024-187,MODELLED_ESTIMATE
+Investigational Molecule K4,Cardiovascular / Metabolic Condition Type 4,DE,0,1,0.78,29.3,0,37.6,3,0,2,https://www.g-ba.de/beschluesse/4088/,HTA-SYNTH-DE-2024-188,MODELLED_ESTIMATE
+Investigational Molecule L4,Cardiovascular / Metabolic Condition Type 5,DE,0,0,0.88,14.0,0,16.8,5,1,0,https://www.g-ba.de/beschluesse/4089/,HTA-SYNTH-DE-2024-189,MODELLED_ESTIMATE
+Investigational Molecule M4,Cardiovascular / Metabolic Condition Type 1,FR,0,1,0.76,13.4,0,26.1,4,0,2,https://www.has-sante.fr/jcms/p_3000090/fr/,HTA-SYNTH-FR-2024-190,MODELLED_ESTIMATE
+Investigational Molecule N4,Cardiovascular / Metabolic Condition Type 2,FR,0,1,0.66,37.3,1,14.4,5,0,2,https://www.has-sante.fr/jcms/p_3000091/fr/,HTA-SYNTH-FR-2024-191,MODELLED_ESTIMATE
+Investigational Molecule O4,Cardiovascular / Metabolic Condition Type 3,FR,0,1,0.64,35.8,1,66.2,2,0,2,https://www.has-sante.fr/jcms/p_3000092/fr/,HTA-SYNTH-FR-2024-192,MODELLED_ESTIMATE
+Investigational Molecule P4,Cardiovascular / Metabolic Condition Type 4,DE,0,1,0.77,29.5,0,54.6,3,0,2,https://www.g-ba.de/beschluesse/4093/,HTA-SYNTH-DE-2024-193,MODELLED_ESTIMATE
+Investigational Molecule Q4,Cardiovascular / Metabolic Condition Type 5,DE,0,0,0.85,21.5,0,6.5,3,0,0,https://www.g-ba.de/beschluesse/4094/,HTA-SYNTH-DE-2024-194,MODELLED_ESTIMATE
+Investigational Molecule R4,Cardiovascular / Metabolic Condition Type 1,FR,0,1,0.9,9.1,0,54.0,5,0,1,https://www.has-sante.fr/jcms/p_3000095/fr/,HTA-SYNTH-FR-2024-195,MODELLED_ESTIMATE
+Investigational Molecule S4,Cardiovascular / Metabolic Condition Type 2,DE,0,0,0.84,8.1,0,88.7,5,0,0,https://www.g-ba.de/beschluesse/4096/,HTA-SYNTH-DE-2024-196,MODELLED_ESTIMATE
+Investigational Molecule T4,Cardiovascular / Metabolic Condition Type 3,FR,0,0,0.71,31.0,1,9.7,3,0,1,https://www.has-sante.fr/jcms/p_3000097/fr/,HTA-SYNTH-FR-2024-197,MODELLED_ESTIMATE
+Investigational Molecule U4,Cardiovascular / Metabolic Condition Type 4,UK,0,1,0.86,29.8,0,34.4,3,0,1,https://www.nice.org.uk/guidance/ta398,HTA-SYNTH-UK-2024-198,MODELLED_ESTIMATE
+Investigational Molecule V4,Cardiovascular / Metabolic Condition Type 5,FR,0,1,0.77,18.5,0,40.6,2,0,1,https://www.has-sante.fr/jcms/p_3000099/fr/,HTA-SYNTH-FR-2024-199,MODELLED_ESTIMATE
+Investigational Molecule W4,Cardiovascular / Metabolic Condition Type 1,FR,0,1,0.89,9.8,0,86.7,1,0,1,https://www.has-sante.fr/jcms/p_3000100/fr/,HTA-SYNTH-FR-2024-200,MODELLED_ESTIMATE
+Investigational Molecule X4,Cardiovascular / Metabolic Condition Type 2,UK,0,1,0.87,6.8,0,68.7,3,0,1,https://www.nice.org.uk/guidance/ta401,HTA-SYNTH-UK-2024-201,MODELLED_ESTIMATE
+Investigational Molecule Y4,Cardiovascular / Metabolic Condition Type 3,FR,0,1,0.7,26.0,1,70.9,3,1,2,https://www.has-sante.fr/jcms/p_3000102/fr/,HTA-SYNTH-FR-2024-202,MODELLED_ESTIMATE
+Investigational Molecule Z4,Cardiovascular / Metabolic Condition Type 4,DE,0,1,0.76,9.9,0,78.3,3,0,2,https://www.g-ba.de/beschluesse/4103/,HTA-SYNTH-DE-2024-203,MODELLED_ESTIMATE
+Investigational Molecule A5,Cardiovascular / Metabolic Condition Type 5,FR,0,1,0.73,9.2,0,65.9,3,0,2,https://www.has-sante.fr/jcms/p_3000104/fr/,HTA-SYNTH-FR-2024-204,MODELLED_ESTIMATE

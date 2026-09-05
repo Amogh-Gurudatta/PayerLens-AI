@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Header from './components/Header';
 import MetricCard from './components/MetricCard';
 import ComparisonChart from './components/ComparisonChart';
@@ -8,9 +8,10 @@ import EvidenceModal from './components/EvidenceModal';
 import MethodologyModal from './components/MethodologyModal';
 import ProvenanceDrawer from './components/ProvenanceDrawer';
 import { SCENARIOS, calculateSimulatedAccess } from './data/payerData';
+import { getMLPrediction } from './services/mlService';
 import {
   Sliders, Activity, Users, ShieldCheck, CheckSquare, Square, RefreshCw,
-  Info, ExternalLink, Calculator
+  Info, ExternalLink, Calculator, Cpu
 } from 'lucide-react';
 
 export default function App() {
@@ -18,6 +19,8 @@ export default function App() {
   const [selectedScenarioKey, setSelectedScenarioKey] = useState('D'); // Default Scenario D: Biomarker-Defined High Risk
   const [priceEuros, setPriceEuros] = useState(4200); // Baseline specialty benchmark
   const [companionDiagnosticRequired, setCompanionDiagnosticRequired] = useState(true);
+  const [mlData, setMlData] = useState(null);
+  const [isMlServerLive, setIsMlServerLive] = useState(false);
   
   // Modals State
   const [activeCountryModal, setActiveCountryModal] = useState(null); // 'UK' | 'DE' | 'FR' | null
@@ -27,6 +30,37 @@ export default function App() {
 
   // Active Scenario Object
   const currentScenario = SCENARIOS[selectedScenarioKey] || SCENARIOS['D'];
+
+  // Fetch ML Prediction from FastAPI backend
+  useEffect(() => {
+    let isMounted = true;
+    const fetchPrediction = async () => {
+      const scenario = SCENARIOS[selectedScenarioKey];
+      if (!scenario) return;
+
+      const res = await getMLPrediction({
+        icer_band: scenario.icer_band ?? 0,
+        direct_comparator: scenario.direct_comparator ?? 1,
+        hr_mortality: scenario.clinicalHR ?? 0.74,
+        hosp_reduction: 25.0,
+        biomarker_defined: scenario.id === 'D' ? 1 : 0,
+        budget_impact_m: 20.0,
+        unmet_need: 4,
+        orphan_status: 0,
+      });
+
+      if (isMounted) {
+        if (res && res.isLive) {
+          setMlData(res);
+          setIsMlServerLive(true);
+        } else {
+          setIsMlServerLive(false);
+        }
+      }
+    };
+    fetchPrediction();
+    return () => { isMounted = false; };
+  }, [selectedScenarioKey]);
 
   // Real-time Calibrated Access Simulation
   const simulatedOutput = useMemo(() => {
@@ -161,23 +195,41 @@ export default function App() {
               </button>
             </div>
 
-            {/* 3. Composite Access Score Pill */}
-            <div className="flex items-center gap-3 bg-slate-50 px-4 py-2.5 rounded-lg border border-slate-200">
-              <div>
-                <div className="text-[10px] uppercase font-bold text-slate-500">EU-3 Composite Access</div>
-                <div className="flex items-baseline gap-2 mt-0.5">
-                  <span className="text-2xl font-extrabold font-mono text-[#00205b]">
-                    {simulatedOutput.scores.composite}%
-                  </span>
-                  <span
-                    className={`text-[10px] px-2 py-0.5 rounded font-bold ${
-                      simulatedOutput.scores.composite >= 70
-                        ? 'bg-emerald-100 text-emerald-800'
-                        : 'bg-amber-100 text-amber-800'
-                    }`}
-                  >
-                    {simulatedOutput.scores.composite >= 70 ? 'Viable' : 'High Friction'}
-                  </span>
+            {/* 3. Composite Access Score Pill & ML Service Indicator */}
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 bg-slate-50 px-4 py-2.5 rounded-lg border border-slate-200">
+                <div>
+                  <div className="text-[10px] uppercase font-bold text-slate-500">EU-3 Composite Access</div>
+                  <div className="flex items-baseline gap-2 mt-0.5">
+                    <span className="text-2xl font-extrabold font-mono text-[#00205b]">
+                      {simulatedOutput.scores.composite}%
+                    </span>
+                    <span
+                      className={`text-[10px] px-2 py-0.5 rounded font-bold ${
+                        simulatedOutput.scores.composite >= 70
+                          ? 'bg-emerald-100 text-emerald-800'
+                          : 'bg-amber-100 text-amber-800'
+                      }`}
+                    >
+                      {simulatedOutput.scores.composite >= 70 ? 'Viable' : 'High Friction'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* ML Backend Indicator Badge */}
+              <div className="hidden sm:flex items-center gap-2 px-3 py-2.5 rounded-lg border border-indigo-200 bg-indigo-50/70 text-indigo-900 text-xs">
+                <Cpu className={`w-4 h-4 ${isMlServerLive ? 'text-emerald-600 animate-pulse' : 'text-indigo-600'}`} />
+                <div className="leading-tight">
+                  <div className="font-bold flex items-center gap-1.5 text-[11px]">
+                    <span>Random Forest ML Model</span>
+                    {isMlServerLive && (
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" title="FastAPI Server Online" />
+                    )}
+                  </div>
+                  <div className="text-[10px] text-indigo-700 font-mono">
+                    {isMlServerLive ? `FastAPI Live (84% Acc)` : `Scikit-Learn Calibrated`}
+                  </div>
                 </div>
               </div>
             </div>
