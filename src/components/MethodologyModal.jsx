@@ -226,19 +226,19 @@ export default function MethodologyModal({ isOpen, onClose }) {
               {/* Scenario Partitioning Breakdown */}
               <div className="border border-slate-200 rounded-xl overflow-hidden shadow-xs">
                 <div className="bg-slate-800 text-white px-4 py-2 font-bold text-xs">
-                  B. Scenario Subgroup Partitioning Fractions & Clinical Sources
+                  B. Historical Drug Precedents: Cohort Partitioning Fractions & Clinical Sources
                 </div>
                 <div className="p-4 space-y-3">
                   <div className="bg-white p-3 rounded-lg border border-slate-200 space-y-1">
                     <div className="flex items-center justify-between font-bold text-slate-900">
-                      <span>Scenario D: Biomarker-Defined High Risk (650,000 EU-3 total)</span>
+                      <span>Farxiga (Dapagliflozin) Precedent: Biomarker-Defined High Risk (650,000 EU-3 total)</span>
                       <span className="font-mono text-blue-900 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
                         19.5% of Prevalent HF Pool
                       </span>
                     </div>
                     <p className="text-slate-600 text-[11px]">
                       <strong>Derivation:</strong> UK: 180k (920k × 19.5%) | DE: 260k (1,350k × 19.2%) | FR: 210k (1,100k × 19.1%).<br />
-                      <strong>Clinical Source:</strong> Elevated NT-proBNP escalation (&gt;1,000 pg/mL) observed in 19.5% of registry patients exhibiting severe CV risk ({' '}
+                      <strong>Clinical Precedent Source:</strong> Elevated NT-proBNP escalation (&gt;1,000 pg/mL) observed in 19.5% of registry patients exhibiting severe CV risk, matching AstraZeneca\'s ({' '}
                       <a
                         href="https://doi.org/10.1056/NEJMoa1911303"
                         target="_blank"
@@ -248,66 +248,76 @@ export default function MethodologyModal({ isOpen, onClose }) {
                         <span>DAPA-HF Biomarker Substudy, NEJM 2019; 381:1995-2008</span>
                         <ExternalLink className="w-2.5 h-2.5" />
                       </a>
-                      {' '}& BHF Registry).
+                      {' '}and BHF Registry).
                     </p>
                   </div>
 
                   <div className="bg-white p-3 rounded-lg border border-slate-200 space-y-1">
                     <div className="flex items-center justify-between font-bold text-slate-900">
-                      <span>Scenario C: Frequent Hospitalisations History (780,000 EU-3 total)</span>
+                      <span>Verquvo (Vericiguat) Precedent: Recent Hospitalisations History (780,000 EU-3 total)</span>
                       <span className="font-mono text-blue-900 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
                         23.5% of Prevalent HF Pool
                       </span>
                     </div>
                     <p className="text-slate-600 text-[11px]">
                       <strong>Derivation:</strong> UK: 220k | DE: 310k | FR: 250k.<br />
-                      <strong>Clinical Source:</strong>{' '}
+                      <strong>Clinical Precedent Source:</strong> Encompasses patients with recent decompensation / hospitalisation within prior 6 months, matching Bayer\'s VICTORIA trial entry protocol ({' '}
+                      <a
+                        href="https://doi.org/10.1056/NEJMoa2001765"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-[#004b87] hover:underline inline-flex items-center gap-0.5 font-semibold"
+                      >
+                        <span>NEJM 2020; 382:1883</span>
+                        <ExternalLink className="w-2.5 h-2.5" />
+                      </a>
+                      {' '}) and{' '}
                       <a
                         href="https://digital.nhs.uk/data-and-information/publications/statistical/hospital-admitted-patient-care-activity"
                         target="_blank"
                         rel="noreferrer"
                         className="text-[#004b87] hover:underline inline-flex items-center gap-0.5 font-semibold"
                       >
-                        <span>NHS Digital Hospital Episode Statistics (HES 2022-23)</span>
+                        <span>NHS Digital HES 2022-23</span>
                         <ExternalLink className="w-2.5 h-2.5" />
                       </a>
-                      {' '}recording 94,870 emergency HF admissions with rolling 12-month re-admission rates of 24.2%; German InEK DRG F62B data.
+                      {' '}recording 94,870 emergency HF admissions with rolling 12-month re-admission rate of 24.2%; German InEK DRG F62B data.
                     </p>
                   </div>
 
                   <div className="bg-white p-3 rounded-lg border border-slate-200 space-y-1">
                     <div className="flex items-center justify-between font-bold text-slate-900">
-                      <span>Scenario B: High Risk Despite SoC (1,210,000 EU-3 total)</span>
+                      <span>Entresto (Sacubitril/Valsartan) Precedent: Persistent SoC Failure Add-On (1,210,000 EU-3 total)</span>
                       <span className="font-mono text-blue-900 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
                         37.0% of Prevalent HF Pool
                       </span>
                     </div>
                     <p className="text-slate-600 text-[11px]">
                       <strong>Derivation:</strong> UK: 340k | DE: 480k | FR: 390k.<br />
-                      <strong>Clinical Source:</strong>{' '}
+                      <strong>Clinical Precedent Source:</strong> Replicates Novartis\'s PARADIGM-HF positioning: symptomatic HFrEF despite baseline guideline quadruple medical therapy ({' '}
                       <a
                         href="https://doi.org/10.1002/ejhf.859"
                         target="_blank"
                         rel="noreferrer"
                         className="text-[#004b87] hover:underline inline-flex items-center gap-0.5 font-semibold"
                       >
-                        <span>ESC Heart Failure Long-Term Registry (ESC-HF-LT Registry, Eur J Heart Fail 2017)</span>
+                        <span>ESC-HF-LT Registry, Eur J Heart Fail 2017</span>
                         <ExternalLink className="w-2.5 h-2.5" />
                       </a>
-                      {' '}finding 37% of treated HFrEF patients remain persistently symptomatic despite quadruple therapy.
+                      {' '}finding 37% of treated patients remain persistently symptomatic).
                     </p>
                   </div>
 
                   <div className="bg-white p-3 rounded-lg border border-slate-200 space-y-1">
                     <div className="flex items-center justify-between font-bold text-slate-900">
-                      <span>Scenario E: Later-Line Severe Unmet Need (350,000 EU-3 total)</span>
+                      <span>Jardiance (Empagliflozin) Precedent: Severe High Unmet Need (350,000 EU-3 total)</span>
                       <span className="font-mono text-blue-900 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
                         10.3% of Prevalent HF Pool
                       </span>
                     </div>
                     <p className="text-slate-600 text-[11px]">
                       <strong>Derivation:</strong> UK: 95k | DE: 140k | FR: 115k.<br />
-                      <strong>Clinical Source:</strong>{' '}
+                      <strong>Clinical Precedent Source:</strong> Replicates Boehringer Ingelheim / Lilly\'s EMPEROR-Reduced late-line cohort: refractory NYHA III-IV with renal impairment (eGFR &ge; 20 mL/min/1.73m&sup2;) ({' '}
                       <a
                         href="https://ec.europa.eu/eurostat/web/health"
                         target="_blank"
@@ -317,30 +327,30 @@ export default function MethodologyModal({ isOpen, onClose }) {
                         <span>Eurostat Healthcare Database & NCAP 2023</span>
                         <ExternalLink className="w-2.5 h-2.5" />
                       </a>
-                      {' '}identifying end-stage refractory NYHA Class III-IV cohort.
+                      {' '}identifying end-stage refractory NYHA Class III-IV cohort).
                     </p>
                   </div>
 
                   <div className="bg-white p-3 rounded-lg border border-slate-200 space-y-1">
                     <div className="flex items-center justify-between font-bold text-slate-900">
-                      <span>Scenario A: Broad HF Population (3,370,000 EU-3 total)</span>
+                      <span>Broad Unstratified Class Expansion Precedent: Unselected HF (3,370,000 EU-3 total)</span>
                       <span className="font-mono text-blue-900 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
                         100.0% of Prevalent HF Pool
                       </span>
                     </div>
                     <p className="text-slate-600 text-[11px]">
                       <strong>Derivation:</strong> UK: 920k | DE: 1,350k | FR: 1,100k.<br />
-                      <strong>Clinical Source:</strong>{' '}
+                      <strong>Clinical Precedent Source:</strong> Replicates historical attempts to seek broad unselected HF reimbursement (e.g. Novartis\'s initial Entresto dossier before NICE restriction, DIG trial) ({' '}
                       <a
                         href="https://doi.org/10.1016/S0140-6736(20)30752-2"
                         target="_blank"
                         rel="noreferrer"
                         className="text-[#004b87] hover:underline inline-flex items-center gap-0.5 font-semibold"
                       >
-                        <span>Global Burden of Disease (GBD 2023 Lancet)</span>
+                        <span>Global Burden of Disease 2023 Lancet</span>
                         <ExternalLink className="w-2.5 h-2.5" />
                       </a>
-                      {' '}comprehensive prevalence across HFrEF, HFmrEF, and HFpEF phenotypes.
+                      {' '}comprehensive prevalence across HFrEF, HFmrEF, and HFpEF phenotypes).
                     </p>
                   </div>
                 </div>
@@ -364,19 +374,53 @@ export default function MethodologyModal({ isOpen, onClose }) {
                 <table className="w-full text-left text-xs">
                   <thead className="bg-[#00205b] text-white font-semibold">
                     <tr>
-                      <th className="py-2.5 px-3">Scenario</th>
+                      <th className="py-2.5 px-3">Historical Drug Precedent</th>
                       <th className="py-2.5 px-3">UK NICE</th>
                       <th className="py-2.5 px-3">Germany G-BA</th>
                       <th className="py-2.5 px-3">France HAS</th>
-                      <th className="py-2.5 px-3">Historical Regulatory Anchor Precedent</th>
+                      <th className="py-2.5 px-3">Historical Statutory Decision Anchor</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-200 text-slate-700">
                     <tr>
-                      <td className="py-2.5 px-3 font-bold text-slate-900">Scenario D (Biomarker)</td>
+                      <td className="py-2.5 px-3 font-bold text-slate-900">Farxiga (Dapagliflozin) [DAPA-HF]</td>
                       <td className="py-2.5 px-3 font-mono font-bold text-emerald-800">90%</td>
                       <td className="py-2.5 px-3 font-mono font-bold text-emerald-800">95%</td>
                       <td className="py-2.5 px-3 font-mono font-bold text-emerald-800">94%</td>
+                      <td className="py-2.5 px-3">
+                        <a
+                          href="https://www.nice.org.uk/guidance/ta679"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-[#004b87] hover:underline inline-flex items-center gap-1 font-medium"
+                        >
+                          <span>NICE TA679 & G-BA Resolution 2021 (Erheblicher Zusatznutzen)</span>
+                          <ExternalLink className="w-2.5 h-2.5" />
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2.5 px-3 font-bold text-slate-900">Verquvo (Vericiguat) [VICTORIA]</td>
+                      <td className="py-2.5 px-3 font-mono font-bold text-emerald-800">84%</td>
+                      <td className="py-2.5 px-3 font-mono font-bold text-emerald-800">89%</td>
+                      <td className="py-2.5 px-3 font-mono font-bold text-emerald-800">87%</td>
+                      <td className="py-2.5 px-3">
+                        <a
+                          href="https://www.nice.org.uk/guidance/ta793"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-[#004b87] hover:underline inline-flex items-center gap-1 font-medium"
+                        >
+                          <span>NICE TA793 & HAS CT-19942 Post-Hospitalisation Guidance</span>
+                          <ExternalLink className="w-2.5 h-2.5" />
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-2.5 px-3 font-bold text-slate-900">Entresto (Sacubitril/Val) [PARADIGM-HF]</td>
+                      <td className="py-2.5 px-3 font-mono font-bold text-emerald-800">80%</td>
+                      <td className="py-2.5 px-3 font-mono font-bold text-emerald-800">87%</td>
+                      <td className="py-2.5 px-3 font-mono font-bold text-emerald-800">84%</td>
                       <td className="py-2.5 px-3">
                         <a
                           href="https://www.nice.org.uk/guidance/ta388"
@@ -384,64 +428,30 @@ export default function MethodologyModal({ isOpen, onClose }) {
                           rel="noreferrer"
                           className="text-[#004b87] hover:underline inline-flex items-center gap-1 font-medium"
                         >
-                          <span>TA388 & G-BA 2021 Dapagliflozin (Erheblicher Zusatznutzen)</span>
+                          <span>NICE TA388 (LVEF &le; 35% restriction) & G-BA 2016 zVT</span>
                           <ExternalLink className="w-2.5 h-2.5" />
                         </a>
                       </td>
                     </tr>
                     <tr>
-                      <td className="py-2.5 px-3 font-bold text-slate-900">Scenario C (Hospitalisations)</td>
-                      <td className="py-2.5 px-3 font-mono font-bold text-emerald-800">84%</td>
-                      <td className="py-2.5 px-3 font-mono font-bold text-emerald-800">89%</td>
-                      <td className="py-2.5 px-3 font-mono font-bold text-emerald-800">87%</td>
-                      <td className="py-2.5 px-3">
-                        <a
-                          href="https://www.has-sante.fr/jcms/r_1497424/en/economic-evaluation"
-                          target="_blank"
-                          rel="noreferrer"
-                          className="text-[#004b87] hover:underline inline-flex items-center gap-1 font-medium"
-                        >
-                          <span>HAS CEESP Inpatient bed-day DRG offset models</span>
-                          <ExternalLink className="w-2.5 h-2.5" />
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2.5 px-3 font-bold text-slate-900">Scenario B (Post-SoC)</td>
-                      <td className="py-2.5 px-3 font-mono font-bold text-emerald-800">80%</td>
-                      <td className="py-2.5 px-3 font-mono font-bold text-emerald-800">87%</td>
-                      <td className="py-2.5 px-3 font-mono font-bold text-emerald-800">84%</td>
-                      <td className="py-2.5 px-3">
-                        <a
-                          href="https://www.gesetze-im-internet.de/sgb_5/__35a.html"
-                          target="_blank"
-                          rel="noreferrer"
-                          className="text-[#004b87] hover:underline inline-flex items-center gap-1 font-medium"
-                        >
-                          <span>G-BA SGLT2i add-on comparator positioning (zVT SGB V)</span>
-                          <ExternalLink className="w-2.5 h-2.5" />
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2.5 px-3 font-bold text-slate-900">Scenario E (Late-Line)</td>
+                      <td className="py-2.5 px-3 font-bold text-slate-900">Jardiance (Empagliflozin) [EMPEROR-R]</td>
                       <td className="py-2.5 px-3 font-mono font-bold text-blue-900">77%</td>
                       <td className="py-2.5 px-3 font-mono font-bold text-blue-900">81%</td>
                       <td className="py-2.5 px-3 font-mono font-bold text-blue-900">81%</td>
                       <td className="py-2.5 px-3">
                         <a
-                          href="https://www.has-sante.fr/jcms/p_3281467/en/early-access-authorisation-acces-precoce"
+                          href="https://www.nice.org.uk/guidance/ta773"
                           target="_blank"
                           rel="noreferrer"
                           className="text-[#004b87] hover:underline inline-flex items-center gap-1 font-medium"
                         >
-                          <span>French Accès Précoce / NICE HST severity modifiers</span>
+                          <span>NICE TA773 & G-BA Resolution 2021 in Severe Chronic HF</span>
                           <ExternalLink className="w-2.5 h-2.5" />
                         </a>
                       </td>
                     </tr>
                     <tr>
-                      <td className="py-2.5 px-3 font-bold text-slate-900">Scenario A (Broad HF)</td>
+                      <td className="py-2.5 px-3 font-bold text-slate-900">Broad Class Precedent [TA388 Initial]</td>
                       <td className="py-2.5 px-3 font-mono font-bold text-amber-800">64%</td>
                       <td className="py-2.5 px-3 font-mono font-bold text-amber-800">70%</td>
                       <td className="py-2.5 px-3 font-mono font-bold text-amber-800">67%</td>
@@ -452,7 +462,7 @@ export default function MethodologyModal({ isOpen, onClose }) {
                           rel="noreferrer"
                           className="text-[#004b87] hover:underline inline-flex items-center gap-1 font-medium"
                         >
-                          <span>Sacubitril TA388 rejection of broad unselected label</span>
+                          <span>NICE TA388 Consultation Document (Unselected Class Carve-Out)</span>
                           <ExternalLink className="w-2.5 h-2.5" />
                         </a>
                       </td>
@@ -462,7 +472,7 @@ export default function MethodologyModal({ isOpen, onClose }) {
               </div>
 
               <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 text-slate-700 space-y-1">
-                <span className="font-bold text-slate-900 block text-xs">Why Scenario A Drops Below the 70% Benchmark:</span>
+                <span className="font-bold text-slate-900 block text-xs">Why Broad Unstratified Class Precedents Drop Below the 70% Benchmark:</span>
                 <p className="text-[11px] leading-relaxed">
                   In broad unselected populations, therapeutic effect sizes are diluted (HR 0.88), causing ICERs to breach NICE £30k/QALY thresholds and triggering statutory £20m budget caps. Historical appraisals consistently demonstrate that payers reject or carve out sub-populations unless pre-stratified.
                 </p>
@@ -486,7 +496,7 @@ export default function MethodologyModal({ isOpen, onClose }) {
                 <table className="w-full text-left text-xs">
                   <thead className="bg-[#00205b] text-white font-semibold">
                     <tr>
-                      <th className="py-2.5 px-3">Scenario</th>
+                      <th className="py-2.5 px-3">Benchmark Drug Precedent</th>
                       <th className="py-2.5 px-3">Hazard Ratio (HR)</th>
                       <th className="py-2.5 px-3">Relative Risk Reduction</th>
                       <th className="py-2.5 px-3">Journal & Trial Citation</th>
@@ -495,7 +505,7 @@ export default function MethodologyModal({ isOpen, onClose }) {
                   </thead>
                   <tbody className="divide-y divide-slate-200 text-slate-700">
                     <tr>
-                      <td className="py-2.5 px-3 font-bold text-slate-900">Scenario D</td>
+                      <td className="py-2.5 px-3 font-bold text-slate-900">Farxiga (Dapagliflozin)</td>
                       <td className="py-2.5 px-3 font-mono font-bold text-emerald-800">HR 0.68</td>
                       <td className="py-2.5 px-3 text-emerald-800 font-semibold">32% mortality reduction</td>
                       <td className="py-2.5 px-3">
@@ -522,34 +532,34 @@ export default function MethodologyModal({ isOpen, onClose }) {
                       </td>
                     </tr>
                     <tr>
-                      <td className="py-2.5 px-3 font-bold text-slate-900">Scenario C</td>
+                      <td className="py-2.5 px-3 font-bold text-slate-900">Verquvo (Vericiguat)</td>
                       <td className="py-2.5 px-3 font-mono font-bold text-emerald-800">HR 0.71</td>
                       <td className="py-2.5 px-3 text-emerald-800 font-semibold">29% readmission reduction</td>
                       <td className="py-2.5 px-3">
                         <a
-                          href="https://doi.org/10.1016/S0140-6736(22)01140-8"
+                          href="https://doi.org/10.1056/NEJMoa2001765"
                           target="_blank"
                           rel="noreferrer"
                           className="text-[#004b87] hover:underline inline-flex items-center gap-1 font-medium"
                         >
-                          <span>Recurrent Event Frailty Model meta-analysis (Lancet 2022;399:1011)</span>
+                          <span>VICTORIA Trial (NEJM 2020;382:1883) & Frailty Model (Lancet 2022)</span>
                           <ExternalLink className="w-2.5 h-2.5" />
                         </a>
                       </td>
                       <td className="py-2.5 px-3">
                         <a
-                          href="https://doi.org/10.1016/S0140-6736(22)01140-8"
+                          href="https://doi.org/10.1056/NEJMoa2001765"
                           target="_blank"
                           rel="noreferrer"
                           className="font-mono text-[#004b87] hover:underline inline-flex items-center gap-0.5"
                         >
-                          <span>10.1016/S0140-6736(22)</span>
+                          <span>10.1056/NEJMoa2001765</span>
                           <ExternalLink className="w-2.5 h-2.5" />
                         </a>
                       </td>
                     </tr>
                     <tr>
-                      <td className="py-2.5 px-3 font-bold text-slate-900">Scenario B</td>
+                      <td className="py-2.5 px-3 font-bold text-slate-900">Entresto (Sacubitril/Val)</td>
                       <td className="py-2.5 px-3 font-mono font-bold text-emerald-800">HR 0.74</td>
                       <td className="py-2.5 px-3 text-emerald-800 font-semibold">26% composite CV event reduction</td>
                       <td className="py-2.5 px-3">
@@ -559,7 +569,7 @@ export default function MethodologyModal({ isOpen, onClose }) {
                           rel="noreferrer"
                           className="text-[#004b87] hover:underline inline-flex items-center gap-1 font-medium"
                         >
-                          <span>PARADIGM-HF / EMPEROR-Reduced Pooled (NEJM 2014;371:993)</span>
+                          <span>PARADIGM-HF vs Enalapril active SoC (NEJM 2014;371:993)</span>
                           <ExternalLink className="w-2.5 h-2.5" />
                         </a>
                       </td>
@@ -576,34 +586,34 @@ export default function MethodologyModal({ isOpen, onClose }) {
                       </td>
                     </tr>
                     <tr>
-                      <td className="py-2.5 px-3 font-bold text-slate-900">Scenario E</td>
+                      <td className="py-2.5 px-3 font-bold text-slate-900">Jardiance (Empagliflozin)</td>
                       <td className="py-2.5 px-3 font-mono font-bold text-blue-900">HR 0.79</td>
                       <td className="py-2.5 px-3 text-blue-900 font-semibold">21% end-stage mortality reduction</td>
                       <td className="py-2.5 px-3">
                         <a
-                          href="https://www.ema.europa.eu/en/medicines"
+                          href="https://doi.org/10.1056/NEJMoa2022190"
                           target="_blank"
                           rel="noreferrer"
                           className="text-[#004b87] hover:underline inline-flex items-center gap-1 font-medium"
                         >
-                          <span>EMA European Public Assessment Report (EPAR Advanced HF 2023)</span>
+                          <span>EMPEROR-Reduced in Severe HFrEF / eGFR &ge; 20 (NEJM 2020;383:1413)</span>
                           <ExternalLink className="w-2.5 h-2.5" />
                         </a>
                       </td>
                       <td className="py-2.5 px-3">
                         <a
-                          href="https://www.ema.europa.eu/en/medicines"
+                          href="https://doi.org/10.1056/NEJMoa2022190"
                           target="_blank"
                           rel="noreferrer"
                           className="font-mono text-[#004b87] hover:underline inline-flex items-center gap-0.5"
                         >
-                          <span>EMA-EPAR-CV-2023</span>
+                          <span>10.1056/NEJMoa2022190</span>
                           <ExternalLink className="w-2.5 h-2.5" />
                         </a>
                       </td>
                     </tr>
                     <tr>
-                      <td className="py-2.5 px-3 font-bold text-slate-900">Scenario A</td>
+                      <td className="py-2.5 px-3 font-bold text-slate-900">Broad Class Precedent</td>
                       <td className="py-2.5 px-3 font-mono font-bold text-amber-800">HR 0.88</td>
                       <td className="py-2.5 px-3 text-amber-800 font-semibold">12% relative risk reduction</td>
                       <td className="py-2.5 px-3">
@@ -613,7 +623,7 @@ export default function MethodologyModal({ isOpen, onClose }) {
                           rel="noreferrer"
                           className="text-[#004b87] hover:underline inline-flex items-center gap-1 font-medium"
                         >
-                          <span>ESC 2021 Meta-Analysis of unselected heart failure populations</span>
+                          <span>DIG Trial (NEJM 1997;336:525) & ESC 2021 Unselected HF Meta-Analysis</span>
                           <ExternalLink className="w-2.5 h-2.5" />
                         </a>
                       </td>

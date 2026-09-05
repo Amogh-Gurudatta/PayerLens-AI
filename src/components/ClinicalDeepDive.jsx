@@ -199,17 +199,17 @@ export default function ClinicalDeepDive({ selectedScenarioKey, onSelectScenario
           <div className="flex items-center gap-2">
             <Activity className="w-5 h-5 text-[#00205b]" />
             <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider m-0">
-              Comparative Cohort Phenotype Matrix (Scenarios A to E)
+              Comparative Precedent Drug Matrix (Historical Benchmark Drugs)
             </h3>
           </div>
-          <span className="text-xs text-slate-500">Click any row to switch active scenario</span>
+          <span className="text-xs text-slate-500">Click any row to switch active drug precedent</span>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
               <tr className="border-b border-slate-200 text-slate-500 text-[11px] uppercase font-semibold bg-slate-50">
-                <th className="py-2.5 px-3">Scenario</th>
+                <th className="py-2.5 px-3">Benchmark Drug</th>
                 <th className="py-2.5 px-3">Clinical Definition</th>
                 <th className="py-2.5 px-3">Pivotal HR</th>
                 <th className="py-2.5 px-3">EU-3 Population</th>
@@ -233,10 +233,12 @@ export default function ClinicalDeepDive({ selectedScenarioKey, onSelectScenario
                     }`}
                   >
                     <td className="py-3 px-3">
-                      <div className="flex items-center gap-1.5">
-                        <span className={`w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-[#00205b]' : 'bg-transparent'}`} />
-                        <span className="font-mono font-bold text-[#00205b]">{sc.code}</span>
-                        <span className="text-slate-500 hidden sm:inline">({sc.shortTag})</span>
+                      <div className="flex flex-col gap-0.5">
+                        <div className="flex items-center gap-1.5">
+                          <span className={`w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-[#00205b]' : 'bg-transparent'}`} />
+                          <span className="font-bold text-[#00205b]">{sc.code}</span>
+                        </div>
+                        <span className="text-slate-500 text-[10px] pl-3">{sc.archetypeRole}</span>
                       </div>
                     </td>
                     <td className="py-3 px-3 max-w-xs truncate text-[11px]" title={sc.definition}>

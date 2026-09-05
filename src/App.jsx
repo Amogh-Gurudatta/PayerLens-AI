@@ -124,7 +124,7 @@ export default function App() {
               <div className="flex items-center justify-between">
                 <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
                   <Activity className="w-3.5 h-3.5 text-[#00205b]" />
-                  <span>Target Patient Cohort Scenario</span>
+                  <span>Historical Precedent Drug Benchmark</span>
                 </span>
                 <span className="text-xs text-slate-500 font-medium">
                   {currentScenario.shortTag} &bull; HR {currentScenario.clinicalHR}
@@ -140,14 +140,14 @@ export default function App() {
                       key={key}
                       type="button"
                       onClick={() => setSelectedScenarioKey(key)}
-                      className={`text-xs px-3.5 py-2 rounded-lg font-medium transition-all flex items-center gap-2 ${
+                      className={`text-xs px-3.5 py-2 rounded-lg font-medium transition-all flex items-center gap-1.5 ${
                         isSelected
                           ? 'bg-[#00205b] text-white font-bold shadow-xs'
                           : 'bg-slate-50 text-slate-700 hover:text-slate-900 hover:bg-slate-100 border border-slate-200'
                       }`}
                     >
-                      <span className="font-mono">{sc.code}</span>
-                      <span className="hidden sm:inline text-[11px] opacity-80">({sc.shortTag})</span>
+                      <span className="font-bold">{sc.code}</span>
+                      <span className="hidden md:inline text-[11px] opacity-80">({sc.shortTag})</span>
                     </button>
                   );
                 })}

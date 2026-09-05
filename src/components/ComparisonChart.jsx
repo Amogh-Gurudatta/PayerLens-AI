@@ -178,7 +178,7 @@ export default function ComparisonChart({
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            All Scenarios (A–E)
+            All Drug Precedents
           </button>
           <button
             type="button"
@@ -247,9 +247,10 @@ export default function ComparisonChart({
               <XAxis
                 dataKey="scenarioKey"
                 stroke="#64748b"
-                tick={{ fill: '#475569', fontSize: 12, fontWeight: 500 }}
+                tick={{ fill: '#475569', fontSize: 11, fontWeight: 600 }}
                 axisLine={{ stroke: '#cbd5e1' }}
-                label={{ value: 'Cohort Scenarios (A: Broad to E: Refractory)', position: 'insideBottom', offset: -15, fill: '#64748b', fontSize: 11 }}
+                tickFormatter={(key) => SCENARIOS[key]?.drugBrand?.split(' ')[0] || SCENARIOS[key]?.code?.split(' ')[0] || key}
+                label={{ value: 'Historical Benchmark Drug Precedents (Farxiga, Verquvo, Entresto, Jardiance, Broad)', position: 'insideBottom', offset: -15, fill: '#64748b', fontSize: 11 }}
               />
               <YAxis
                 domain={[0, 100]}

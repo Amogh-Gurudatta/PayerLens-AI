@@ -36,15 +36,15 @@ export default function StrategicRecommendationBanner({ currentScenario, onOpenC
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         
-        {/* 1. Optimal Subgroup */}
+        {/* 1. Optimal Precedent Archetype */}
         <div className="bg-white/5 border border-white/10 rounded-lg p-3 space-y-1">
           <div className="text-[10px] font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1">
             <CheckCircle2 className="w-3.5 h-3.5" />
-            <span>Optimal Patient Subgroup</span>
+            <span>Optimal Benchmark Precedent</span>
           </div>
-          <div className="text-sm font-bold text-white">Scenario D: Biomarker Stratified</div>
+          <div className="text-sm font-bold text-white">Farxiga (Dapagliflozin): Biomarker-Stratified</div>
           <div className="text-[11px] text-slate-300 leading-snug">
-            Targeting elevated NT-proBNP patients yields highest probability of full reimbursement (**93.4% Avg EU Access**).
+            Targeting elevated NT-proBNP patients (DAPA-HF landmark precedent) yields highest probability of full reimbursement (**93.0% Avg EU Access**).
           </div>
         </div>
 

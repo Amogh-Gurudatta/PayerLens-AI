@@ -42,13 +42,13 @@ export default function ControlsPanel({
         <div className="space-y-1.5 mb-5">
           <div className="flex items-center justify-between">
             <label htmlFor="scenario-selector" className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
-              <span>Patient Cohort Scenario</span>
+              <span>Historical Precedent & Cohort</span>
               <ProvenanceTooltip
-                title="Heart Failure Cohort Stratification"
-                issuingBody="European Society of Cardiology (ESC 2021) / NICE NG106"
+                title="Heart Failure Precedent & Cohort Stratification"
+                issuingBody="European Society of Cardiology (ESC 2021) / NICE / G-BA / HAS"
                 documentId={currentScenario.clinicalDocId}
                 citation={currentScenario.clinicalCitation}
-                methodologyNote="Clinical phenotypes mapped from pivotal HF clinical trials (PARADIGM-HF, DAPA-HF) and national registry data."
+                methodologyNote="Clinical phenotypes mapped directly from landmark HF drug precedents (Farxiga, Verquvo, Entresto, Jardiance) and official HTA rulings."
                 provenanceType={currentScenario.clinicalProvenance}
                 iconOnly
               />
@@ -69,7 +69,7 @@ export default function ControlsPanel({
                 const sc = SCENARIOS[key];
                 return (
                   <option key={key} value={key} className="bg-slate-950 text-slate-100 py-1">
-                    {sc.code}: {sc.name} ({sc.shortTag})
+                    {sc.code} — {sc.archetypeRole}
                   </option>
                 );
               })}
