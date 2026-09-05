@@ -50,9 +50,11 @@ export const PAYER_ECOSYSTEMS = {
     thresholdNumericLower: 20000,
     sourceCitation: 'NICE Health Technology Evaluations Manual (PMG36, 2022); Section 6.2',
     documentId: 'NICE-PMG36-2022-S6.2',
+    citationUrl: 'https://www.nice.org.uk/process/pmg36',
     budgetTrigger: '£20m single-year net NHS budget impact test (Budget Impact Test / Commercial Medicines Unit)',
     benchmarkPrecedent: 'Sacubitril/valsartan (TA388, 2016) - Restricted to LVEF <= 35% & NYHA II-IV',
     benchmarkDocId: 'NICE-TA388-2016',
+    benchmarkUrl: 'https://www.nice.org.uk/guidance/ta388',
     dataType: 'Statutory Guidance / Regulatory Benchmark',
     provenanceType: 'STATUTORY',
     methodologyNote: 'Evaluates incremental cost-utility using Markov cohort models. Treatments exceeding £20k/QALY require exceptional certainty; over £30k/QALY require severe disease modifiers. Triggers commercial access negotiation if net 3-year annual spend > £20m.',
@@ -61,8 +63,7 @@ export const PAYER_ECOSYSTEMS = {
       'Mandatory patient access scheme (PAS) discount if ICER is marginal',
       'Rapid managed access agreement (CDF/IMF) if uncertainty exists',
       'Diagnostic companion availability across primary care trusts'
-    ],
-    citationUrl: 'https://www.nice.org.uk/process/pmg36'
+    ]
   },
   DE: {
     id: 'DE',
@@ -75,9 +76,12 @@ export const PAYER_ECOSYSTEMS = {
     thresholdNumericUpper: 0, // Not ICER based
     sourceCitation: 'German Social Code Book V (SGB V § 35a); G-BA Verfahrensordnung (VerfO 2021)',
     documentId: 'SGB-V-35a-VerfO-2021',
+    citationUrl: 'https://www.g-ba.de/bewertungsverfahren/arzneimittel-nutzenbewertung/',
+    statuteUrl: 'https://www.gesetze-im-internet.de/sgb_5/__35a.html',
     budgetTrigger: 'Immediate statutory price renegotiation with GKV-Spitzenverband if annual turnover > €30m',
     benchmarkPrecedent: 'Dapagliflozin (G-BA Resolution 2021) - Considerable added benefit (Erheblicher Nutzen / zVT)',
     benchmarkDocId: 'G-BA-BAnz-AT-29.06.2021-B4',
+    benchmarkUrl: 'https://www.g-ba.de/beschluesse/4925/',
     dataType: 'Statutory Law / Federal Joint Committee Resolution',
     provenanceType: 'STATUTORY',
     methodologyNote: 'IQWiG dossier assessment rigorously evaluates patient-relevant endpoints (mortality, morbidity, HRQoL) exclusively against an agency-defined appropriate comparator (zweckmäßige Vergleichstherapie - zVT). Cost-effectiveness modeling is forbidden by law during benefit assessment.',
@@ -86,8 +90,7 @@ export const PAYER_ECOSYSTEMS = {
       'Subgroup evidence must be pre-specified in statistical analysis plan',
       'Price freely set for month 1-6; reimbursed discount negotiated from month 7',
       'No added benefit rating results in mandatory reference price grouping (Festbetrag)'
-    ],
-    citationUrl: 'https://www.g-ba.de/bewertungsverfahren/arzneimittel-nutzenbewertung/'
+    ]
   },
   FR: {
     id: 'FR',
@@ -100,9 +103,12 @@ export const PAYER_ECOSYSTEMS = {
     thresholdNumericUpper: 3, // Level III or higher
     sourceCitation: 'HAS Doctrine for Evaluation of Medicinal Products (2020); Code de la santé publique (Art. R163-18)',
     documentId: 'HAS-CT-R163-18-DOC2020',
+    citationUrl: 'https://www.has-sante.fr/jcms/c_412210/en/medicinal-products-evaluation',
+    statuteUrl: 'https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006910609',
     budgetTrigger: 'Mandatory CEESP cost-effectiveness appraisal if forecast French annual revenue > €20m',
     benchmarkPrecedent: 'Entresto CT-15180 (2016) - SMR Important, ASMR IV (Minor added value vs. enalapril)',
     benchmarkDocId: 'HAS-CT-15180-2016',
+    benchmarkUrl: 'https://www.has-sante.fr/jcms/c_2626573/en/entresto-sacubitril-valsartan',
     dataType: 'National Health Authority Opinion',
     provenanceType: 'STATUTORY',
     methodologyNote: 'Dual appraisal track: SMR dictates public reimbursement percentage (65% vs 100% ALD). ASMR level (I Major to V No Added Benefit) strictly gates CEPS pricing negotiations. ASMR IV allows parity with standard of care; ASMR I-III unlocks premium.',
@@ -111,8 +117,7 @@ export const PAYER_ECOSYSTEMS = {
       'ASMR I-III is vital for price premium over generic SoC',
       'CEESP medico-economic evaluation mandatory for sales > €20m',
       'Early access scheme (Accès Précoce) available if severe unmet need'
-    ],
-    citationUrl: 'https://www.has-sante.fr/jcms/c_412210/en/medicinal-products-evaluation'
+    ]
   }
 };
 
@@ -128,6 +133,7 @@ export const SCENARIOS = {
     mortalityReduction: '32% mortality / HF decompensation reduction (HR 0.68, 95% CI: 0.58-0.80, p<0.001)',
     clinicalCitation: 'ESC Heart Failure Guidelines 2021; DAPA-HF subgroup analysis (NEJM 2019;381:1995-2008)',
     clinicalDocId: 'ESC-HF-GL-2021 / NEJM-DAPA-SUBGROUP-2019',
+    clinicalUrl: 'https://doi.org/10.1056/NEJMoa1911303',
     clinicalProvenance: 'CLINICAL',
     baseProbabilities: {
       UK: 90,
@@ -143,12 +149,14 @@ export const SCENARIOS = {
       total: 650000,
       sourceCitation: 'Derived from British Heart Foundation Registry & OECD Health Statistics (HF epidemiology cohort modeling 2024)',
       documentId: 'BHF-OECD-EPI-2024-NTBNP',
+      sourceUrl: 'https://www.bhf.org.uk/what-we-do/our-research/heart-statistics',
       provenanceType: 'EPIDEMIOLOGY',
       methodologyNote: 'Calculated as 19.5% of diagnosed prevalent adult heart failure population exhibiting laboratory-confirmed NT-proBNP escalation.'
     },
     evidenceGap: 'Companion diagnostic validation & NHS primary care assay funding required; regional pathology lab assay calibration variability.',
     evidenceGapAgency: 'NICE Diagnostic Assessment Programme (DAP) & G-BA Labor-Richtlinie',
     evidenceGapDocId: 'NICE-DAP-2023-CDX / G-BA-LAB-2022',
+    evidenceGapUrl: 'https://www.nice.org.uk/about/what-we-do/our-programmes/nice-guidance/nice-diagnostics-guidance',
     evidenceGapProvenance: 'STATUTORY',
     strategicRecommendation: 'Co-package biomarker cut-offs with point-of-care NT-proBNP testing pathways. Establish NHS Central Diagnostic coverage agreement early to eliminate primary care testing barriers in the UK. For Germany, emphasize the 32% mortality delta against standard-of-care quadruple therapy to secure "Considerable Added Benefit" (Erheblicher Zusatznutzen).'
   },
@@ -163,6 +171,7 @@ export const SCENARIOS = {
     mortalityReduction: '29% reduction in recurrent heart failure readmissions (HR 0.71, 95% CI: 0.62-0.82, p=0.002)',
     clinicalCitation: 'ESC Guidelines 2021; Recurrent Event Frailty Model meta-analysis (Lancet 2022;399:1011-1020)',
     clinicalDocId: 'ESC-REC-FRAILTY-2022 / LANCET-2022',
+    clinicalUrl: 'https://doi.org/10.1016/S0140-6736(22)00029-7',
     clinicalProvenance: 'CLINICAL',
     baseProbabilities: {
       UK: 84,
@@ -178,12 +187,14 @@ export const SCENARIOS = {
       total: 780000,
       sourceCitation: 'National Inpatient Hospital Episode Statistics (NHS England HES 2023) & German InEK DRG Data 2023',
       documentId: 'NHS-HES-2023-HF / InEK-DRG-F62B-2023',
+      sourceUrl: 'https://digital.nhs.uk/data-and-information/publications/statistical/hospital-admitted-patient-care-activity',
       provenanceType: 'EPIDEMIOLOGY',
       methodologyNote: 'Filter based on primary diagnostic ICD-10 code I50.x admissions within rolling 365 days across secondary care trusts.'
     },
     evidenceGap: 'Local real-world bed-day registry validation and economic durability past 18 months post-discharge.',
     evidenceGapAgency: 'HAS CEESP Economic Criteria & NICE Budget Impact Test Validation',
     evidenceGapDocId: 'HAS-CEESP-METHODES-2020 / NICE-BIT-2022',
+    evidenceGapUrl: 'https://www.has-sante.fr/jcms/c_412210/en/medicinal-products-evaluation',
     evidenceGapProvenance: 'STATUTORY',
     strategicRecommendation: 'Highlight secondary care bed-day cost offsets (£3,400 per averted NHS admission, €4,200 German DRG F62B offset). Propose risk-sharing performance guarantee: rebate mechanism if readmission reduction falls below 20% in real-world clinic registries.'
   },
@@ -198,6 +209,7 @@ export const SCENARIOS = {
     mortalityReduction: '26% reduction in composite CV death and worsening HF (HR 0.74, 95% CI: 0.65-0.85, p=0.003)',
     clinicalCitation: 'ESC Class I Recommendation Consensus; PARADIGM-HF / EMPEROR-Reduced Pooled Analysis',
     clinicalDocId: 'ESC-CLASS1-2021 / PARADIGM-POOL-2021',
+    clinicalUrl: 'https://doi.org/10.1056/NEJMoa1409077',
     clinicalProvenance: 'CLINICAL',
     baseProbabilities: {
       UK: 80,
@@ -213,12 +225,14 @@ export const SCENARIOS = {
       total: 1210000,
       sourceCitation: 'Derived from ESC Heart Failure Long-Term Registry & European Health Examination Survey (EHES)',
       documentId: 'ESC-HF-REG-2023 / EHES-POP-2023',
+      sourceUrl: 'https://doi.org/10.1002/ejhf.779',
       provenanceType: 'EPIDEMIOLOGY',
       methodologyNote: 'Synthesized from 37.5% of total diagnosed HFrEF population remaining symptomatic despite standard quadruple therapy titration.'
     },
     evidenceGap: 'Direct active head-to-head evidence against modern SGLT2i background therapy without synthetic network meta-analysis assumptions.',
     evidenceGapAgency: 'G-BA zVT Requirement & IQWiG General Methods 6.1',
     evidenceGapDocId: 'IQWiG-GM-6.1-2022 / G-BA-zVT-HF2022',
+    evidenceGapUrl: 'https://www.iqwig.de/en/about-us/methods/methods-paper/',
     evidenceGapProvenance: 'STATUTORY',
     strategicRecommendation: 'Prepare network meta-analysis (NMA) matching IQWiG guidelines for indirect comparisons. In France, file for ASMR III by documenting incremental symptomatic stability (KCCQ score improvements) in patients already refractory to ARNI/SGLT2i.'
   },
@@ -233,6 +247,7 @@ export const SCENARIOS = {
     mortalityReduction: '21% reduction in all-cause mortality in end-stage cohort (HR 0.79, 95% CI: 0.68-0.92, p=0.012)',
     clinicalCitation: 'NYHA Functional Classification / EMA European Public Assessment Report (EPAR 2023)',
     clinicalDocId: 'EMA-EPAR-HF-REFRACT-2023',
+    clinicalUrl: 'https://www.ema.europa.eu/en/medicines',
     clinicalProvenance: 'CLINICAL',
     baseProbabilities: {
       UK: 77,
@@ -248,12 +263,14 @@ export const SCENARIOS = {
       total: 350000,
       sourceCitation: 'Derived from Eurostat Healthcare Statistics & National Cardiac Audit Programme (NCAP 2023)',
       documentId: 'EUROSTAT-NCAP-2023-ESHF',
+      sourceUrl: 'https://ec.europa.eu/eurostat/web/health',
       provenanceType: 'EPIDEMIOLOGY',
       methodologyNote: 'Refractory end-stage HF population estimated at ~10% of total treated HF prevalent pool.'
     },
     evidenceGap: 'Long-term safety registry data in small clinical cohorts with extensive multi-morbidity (renal/hepatic co-pathology).',
     evidenceGapAgency: 'EMA Post-Authorisation Safety Studies (PASS) & NICE Highly Specialised Technologies / CDF',
     evidenceGapDocId: 'EMA-PASS-2022 / NICE-HST-CRITERIA-2021',
+    evidenceGapUrl: 'https://www.ema.europa.eu/en/human-regulatory/post-authorisation/pharmacovigilance/post-authorisation-safety-studies-pass',
     evidenceGapProvenance: 'STATUTORY',
     strategicRecommendation: 'Leverage French Early Access (Accès Précoce) pathway for immediate commercial reimbursement prior to standard CT transparency opinion. For NICE, apply for the severity modifier weight (1.2x to 1.7x QALY weighting) under PMG36 Section 6.2.'
   },
@@ -268,6 +285,7 @@ export const SCENARIOS = {
     mortalityReduction: '12% relative risk reduction (HR 0.88, 95% CI: 0.81-0.96, p=0.024)',
     clinicalCitation: 'ESC Guidelines 2021 General HF Management; Meta-analysis of unselected populations',
     clinicalDocId: 'ESC-HF-UNSELECTED-2021',
+    clinicalUrl: 'https://doi.org/10.1093/eurheartj/ehab368',
     clinicalProvenance: 'CLINICAL',
     baseProbabilities: {
       UK: 64,
@@ -283,12 +301,14 @@ export const SCENARIOS = {
       total: 3370000,
       sourceCitation: 'Derived from Global Burden of Disease (GBD 2023) & National Cardiovascular Registries',
       documentId: 'GBD-2023-HF-EU3',
+      sourceUrl: 'https://www.healthdata.org/research-analysis/gbd',
       provenanceType: 'EPIDEMIOLOGY',
       methodologyNote: 'Encompasses entire diagnosed adult HF population across primary and tertiary registries.'
     },
     evidenceGap: 'Mandatory subgroup stratification required to clear national budget thresholds; high risk of broad rejection or negative reimbursement guidance.',
     evidenceGapAgency: 'NICE £20m Budget Impact Test & G-BA Subgroup Slicing Precedents (VerfO § 7)',
     evidenceGapDocId: 'NICE-BIT-THRESH-2022 / G-BA-VERFO-S7',
+    evidenceGapUrl: 'https://www.nice.org.uk/process/pmg36',
     evidenceGapProvenance: 'STATUTORY',
     strategicRecommendation: 'Do NOT pursue broad unselected label at launch. Historical precedent (e.g. Sacubitril/valsartan TA388, Dapagliflozin 2021) shows payers will unilaterally carve out sub-populations. Voluntarily restrict initial submission to Scenario D or C to protect price integrity.'
   }
@@ -310,6 +330,7 @@ export const DATA_ARCHITECTURE_LAYERS = [
         year: '2021',
         doi: '10.1093/eurheartj/ehab368',
         documentId: 'Eur Heart J. 2021;42(36):3599-3726',
+        url: 'https://doi.org/10.1093/eurheartj/ehab368',
         dataType: 'Peer-Reviewed Clinical Evidence',
         provenanceType: 'CLINICAL',
         notes: 'Establishes foundational diagnostic cut-offs: NT-proBNP (>125 pg/mL non-acute, >300 pg/mL acute), NYHA functional classes, and quadruple therapy backbone standards.'
@@ -321,6 +342,7 @@ export const DATA_ARCHITECTURE_LAYERS = [
         year: '2018 (Updated 2023)',
         doi: 'N/A - UK Statutory Clinical Guideline',
         documentId: 'NICE-NG106-2023',
+        url: 'https://www.nice.org.uk/guidance/ng106',
         dataType: 'Statutory HTA Guideline',
         provenanceType: 'STATUTORY',
         notes: 'Defines NHS diagnostic referral pathways, echocardiography access mandates, and specialist HF team follow-up protocols within 2 weeks of hospital discharge.'
@@ -332,6 +354,7 @@ export const DATA_ARCHITECTURE_LAYERS = [
         year: '2023',
         doi: '10.25504/FAIRsharing.32hsd1',
         documentId: 'HES-APC-2022-23-I50',
+        url: 'https://digital.nhs.uk/data-and-information/publications/statistical/hospital-admitted-patient-care-activity',
         dataType: 'Derived Epidemiology Estimate',
         provenanceType: 'EPIDEMIOLOGY',
         notes: 'Captures 94,870 emergency admissions in England with primary diagnosis ICD-10 I50, demonstrating 14-day median length of stay and 24.2% 30-day readmission rate.'
@@ -343,6 +366,7 @@ export const DATA_ARCHITECTURE_LAYERS = [
         year: '2024',
         doi: 'BHF-STAT-COMP-2024',
         documentId: 'BHF-EPI-UK-2024',
+        url: 'https://www.bhf.org.uk/what-we-do/our-research/heart-statistics',
         dataType: 'Derived Epidemiology Estimate',
         provenanceType: 'EPIDEMIOLOGY',
         notes: 'Estimates 920,000 people living with heart failure in the UK, accounting for 2% of total NHS budget and 5% of all emergency hospital admissions.'
@@ -360,6 +384,7 @@ export const DATA_ARCHITECTURE_LAYERS = [
         year: '2019',
         doi: '10.1056/NEJMoa1911303',
         documentId: 'NEJM 2019; 381:1995-2008',
+        url: 'https://doi.org/10.1056/NEJMoa1911303',
         dataType: 'Peer-Reviewed Clinical Evidence',
         provenanceType: 'CLINICAL',
         notes: 'Pivotal SGLT2i trial demonstrating 26% composite reduction (HR 0.74, 95% CI 0.65-0.85). Subgroup analysis in biomarker-elevated strata demonstrated HR 0.68.'
@@ -371,6 +396,7 @@ export const DATA_ARCHITECTURE_LAYERS = [
         year: '2014',
         doi: '10.1056/NEJMoa1409077',
         documentId: 'NEJM 2014; 371:993-1004',
+        url: 'https://doi.org/10.1056/NEJMoa1409077',
         dataType: 'Peer-Reviewed Clinical Evidence',
         provenanceType: 'CLINICAL',
         notes: 'Pivotal trial for sacubitril/valsartan establishing 20% CV death reduction (HR 0.80) and 21% reduction in first HF hospitalisation (HR 0.79).'
@@ -382,6 +408,7 @@ export const DATA_ARCHITECTURE_LAYERS = [
         year: '2021',
         doi: '10.1056/NEJMoa2107038',
         documentId: 'NEJM 2021; 385:1451-1461',
+        url: 'https://doi.org/10.1056/NEJMoa2107038',
         dataType: 'Peer-Reviewed Clinical Evidence',
         provenanceType: 'CLINICAL',
         notes: 'Extended clinical benefit into HFpEF population with HR 0.79 (95% CI 0.69-0.90), showing that payer differentiation focuses heavily on baseline NT-proBNP severity.'
@@ -393,6 +420,7 @@ export const DATA_ARCHITECTURE_LAYERS = [
         year: '2023',
         doi: 'EMA/CHMP/78921/2023',
         documentId: 'EMA-EPAR-CV-2023',
+        url: 'https://www.ema.europa.eu/en/medicines',
         dataType: 'Statutory HTA Guideline',
         provenanceType: 'STATUTORY',
         notes: 'Regulatory validation of NT-proBNP as a validated surrogate endpoint for hemodynamic stress and secondary cardiac remodeling.'
@@ -410,6 +438,7 @@ export const DATA_ARCHITECTURE_LAYERS = [
         year: '2022',
         doi: 'ISBN 978-1-4731-4416-3',
         documentId: 'NICE-PMG36-2022',
+        url: 'https://www.nice.org.uk/process/pmg36',
         dataType: 'Statutory HTA Guideline',
         provenanceType: 'STATUTORY',
         notes: 'Defines formal cost-effectiveness threshold of £20,000-£30,000/QALY (Section 6.2) and severity modifiers of 1.2x (absolute shortfall >=12 QALYs) and 1.7x (proportional shortfall >=0.95).'
@@ -421,6 +450,7 @@ export const DATA_ARCHITECTURE_LAYERS = [
         year: '2016',
         doi: 'NICE-TA388-2016',
         documentId: 'NICE-TA388',
+        url: 'https://www.nice.org.uk/guidance/ta388',
         dataType: 'Statutory HTA Guideline',
         provenanceType: 'STATUTORY',
         notes: 'Payer precedent: NICE restricted approval to patients with NYHA Class II to IV symptoms, LVEF <= 35%, and receiving stable ACEi/ARB background, rejecting broad unselected label.'
@@ -432,6 +462,7 @@ export const DATA_ARCHITECTURE_LAYERS = [
         year: '2021 (Law enacted 2011)',
         doi: 'BGBl. I S. 2021',
         documentId: 'SGB-V-35a-2021',
+        url: 'https://www.gesetze-im-internet.de/sgb_5/__35a.html',
         dataType: 'Statutory HTA Guideline',
         provenanceType: 'STATUTORY',
         notes: 'Mandates early benefit dossier filing at day 0 of German launch. Benefit ratings: Major (1), Considerable (2), Minor (3), Non-quantifiable (4), No added benefit (5), Less benefit (6). ICERs are explicitly rejected.'
@@ -443,6 +474,7 @@ export const DATA_ARCHITECTURE_LAYERS = [
         year: '2021',
         doi: 'BAnz-AT-29.06.2021-B4',
         documentId: 'G-BA-DAPA-HF-2021',
+        url: 'https://www.g-ba.de/beschluesse/4925/',
         dataType: 'Statutory HTA Guideline',
         provenanceType: 'STATUTORY',
         notes: 'Granted "Considerable Added Benefit" (Erheblicher Zusatznutzen) in HFrEF symptomatic adults, setting precedent for pricing premium against standard comparator SoC.'
@@ -454,6 +486,7 @@ export const DATA_ARCHITECTURE_LAYERS = [
         year: '2020',
         doi: 'HAS-CT-DOCTRINE-2020',
         documentId: 'HAS-DOC-2020',
+        url: 'https://www.has-sante.fr/jcms/c_412210/en/medicinal-products-evaluation',
         dataType: 'Statutory HTA Guideline',
         provenanceType: 'STATUTORY',
         notes: 'Defines 5 levels of ASMR (Amélioration du Service Médical Rendu): ASMR I (Major), II (Important), III (Moderate), IV (Minor), V (No improvement). Governs mandatory CEPS pricing caps.'
@@ -465,6 +498,7 @@ export const DATA_ARCHITECTURE_LAYERS = [
         year: '2016',
         doi: 'HAS-CT-15180-2016',
         documentId: 'HAS-CT-15180',
+        url: 'https://www.has-sante.fr/jcms/c_2626573/en/entresto-sacubitril-valsartan',
         dataType: 'Statutory HTA Guideline',
         provenanceType: 'STATUTORY',
         notes: 'Awarded SMR Important and ASMR IV (Minor added value) vs enalapril, permitting hospital listing and 65% public reimbursement with CEPS price parity against high-dose ACEi.'

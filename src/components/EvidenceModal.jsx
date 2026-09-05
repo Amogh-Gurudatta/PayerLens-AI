@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { X, Award, AlertOctagon, Compass, CheckCircle2, Copy, Check, FileText } from 'lucide-react';
+import { X, Award, AlertOctagon, Compass, CheckCircle2, Copy, Check, FileText, ExternalLink } from 'lucide-react';
 import ProvenanceBadge from './ProvenanceBadge';
 import { SCENARIOS } from '../data/payerData';
 
@@ -82,10 +82,36 @@ export default function EvidenceModal({
                 </div>
               </div>
 
-              <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs space-y-1.5">
-                <span className="text-[10px] uppercase font-bold text-slate-400">Pivotal Trial Citation</span>
+              <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] uppercase font-bold text-slate-400">Pivotal Trial Citation</span>
+                  {scenario.clinicalUrl && (
+                    <a
+                      href={scenario.clinicalUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#004b87] hover:underline"
+                    >
+                      <span>Read Published Paper</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  )}
+                </div>
                 <div className="text-xs font-semibold text-slate-900">{scenario.clinicalCitation}</div>
-                <div className="font-mono text-[#004b87] text-[11px]">Docket Ref: {scenario.clinicalDocId}</div>
+                <div className="flex items-center justify-between text-[11px]">
+                  <span className="font-mono text-[#004b87]">Docket Ref: {scenario.clinicalDocId}</span>
+                  {scenario.eligiblePopulation.sourceUrl && (
+                    <a
+                      href={scenario.eligiblePopulation.sourceUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1 text-[10px] text-slate-500 hover:text-slate-800"
+                    >
+                      <span>Registry Data</span>
+                      <ExternalLink className="w-2.5 h-2.5" />
+                    </a>
+                  )}
+                </div>
               </div>
 
               <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1">
@@ -134,10 +160,23 @@ export default function EvidenceModal({
                 <p className="text-amber-900 text-xs leading-relaxed mt-1 font-medium">{scenario.evidenceGap}</p>
               </div>
 
-              <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs space-y-1">
-                <span className="text-[10px] uppercase font-bold text-slate-400">Challenging HTA Body</span>
+              <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] uppercase font-bold text-slate-400">Challenging HTA Body</span>
+                  {scenario.evidenceGapUrl && (
+                    <a
+                      href={scenario.evidenceGapUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#004b87] hover:underline"
+                    >
+                      <span>View Statutory Guidance</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  )}
+                </div>
                 <div className="text-xs font-bold text-slate-900">{scenario.evidenceGapAgency}</div>
-                <div className="font-mono text-[#004b87] text-[11px] mt-0.5">Statutory Framework: {scenario.evidenceGapDocId}</div>
+                <div className="font-mono text-[#004b87] text-[11px]">Statutory Framework: {scenario.evidenceGapDocId}</div>
               </div>
 
               <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1">
@@ -186,15 +225,37 @@ export default function EvidenceModal({
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs space-y-1">
-                  <span className="font-bold text-slate-900 block text-xs">UK Commercial Medicines Unit</span>
+                <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-slate-900 block text-xs">UK Commercial Medicines Unit</span>
+                    <a
+                      href="https://www.nice.org.uk/process/pmg36"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-[10px] text-[#004b87] hover:underline font-semibold inline-flex items-center gap-0.5"
+                    >
+                      <span>NICE PMG36</span>
+                      <ExternalLink className="w-2.5 h-2.5" />
+                    </a>
+                  </div>
                   <p className="text-[11px] text-slate-600 leading-relaxed">
                     Prepare upfront Patient Access Scheme (PAS) discount to ensure base ICER remains safely below the £25k threshold.
                   </p>
                 </div>
 
-                <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs space-y-1">
-                  <span className="font-bold text-slate-900 block text-xs">German GKV-Spitzenverband</span>
+                <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-slate-900 block text-xs">German GKV-Spitzenverband</span>
+                    <a
+                      href="https://www.gesetze-im-internet.de/sgb_5/__35a.html"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-[10px] text-[#004b87] hover:underline font-semibold inline-flex items-center gap-0.5"
+                    >
+                      <span>SGB V § 35a</span>
+                      <ExternalLink className="w-2.5 h-2.5" />
+                    </a>
+                  </div>
                   <p className="text-[11px] text-slate-600 leading-relaxed">
                     Anchor submission on SGLT2i background superiority to secure Grade 2 Erheblicher Zusatznutzen.
                   </p>
@@ -206,7 +267,14 @@ export default function EvidenceModal({
 
         {/* Modal Footer */}
         <div className="bg-slate-50 p-4 border-t border-slate-200 flex items-center justify-between text-xs">
-          <span className="text-slate-500 font-mono text-[11px]">Novo Nordisk Hackathon 2026 &bull; Audit Dossier</span>
+          <button
+            type="button"
+            onClick={onOpenDrawer}
+            className="text-[#004b87] hover:underline font-semibold inline-flex items-center gap-1.5"
+          >
+            <FileText className="w-3.5 h-3.5" />
+            <span>Open Complete 3-Layer Audit Dossier</span>
+          </button>
           <button
             type="button"
             onClick={onClose}

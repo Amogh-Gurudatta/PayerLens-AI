@@ -76,14 +76,14 @@ export default function ProvenanceTooltip({
           e.stopPropagation();
           setIsOpen(!isOpen);
         }}
-        className={`inline-flex items-center gap-1 text-slate-400 hover:text-cyan-300 transition-colors focus:outline-none focus:ring-1 focus:ring-cyan-400 rounded px-1 py-0.5 ${
-          isOpen ? 'text-cyan-400 ring-1 ring-cyan-500/50 bg-cyan-950/40' : ''
+        className={`inline-flex items-center gap-1 text-slate-400 hover:text-[#00205b] transition-colors focus:outline-none rounded px-1 py-0.5 ${
+          isOpen ? 'text-[#00205b] bg-blue-50' : ''
         }`}
         aria-label="Inspect data provenance and citation"
       >
         {children}
         {iconOnly && (
-          <Info className="w-3.5 h-3.5 text-cyan-400/80 group-hover/tooltip:text-cyan-300 transition-transform group-hover/tooltip:scale-110" />
+          <Info className="w-3.5 h-3.5 text-slate-400 hover:text-[#00205b] transition-transform group-hover/tooltip:scale-110" />
         )}
       </button>
 
@@ -92,7 +92,7 @@ export default function ProvenanceTooltip({
         <div
           role="dialog"
           aria-label="Citation Audit Card"
-          className={`absolute z-50 w-80 sm:w-96 rounded-xl p-4 text-left shadow-2xl border bg-slate-950/95 border-cyan-500/30 backdrop-blur-xl text-slate-200 animate-fade-in ${
+          className={`absolute z-50 w-80 sm:w-96 rounded-xl p-4 text-left shadow-2xl border bg-white border-slate-200 text-slate-800 animate-fade-in ${
             position === 'top' ? 'bottom-full mb-2.5' : 'top-full mt-2.5'
           } ${
             align === 'left'
@@ -104,10 +104,10 @@ export default function ProvenanceTooltip({
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header with Provenance Badge */}
-          <div className="flex items-start justify-between gap-2 pb-2.5 border-b border-slate-800">
+          <div className="flex items-start justify-between gap-2 pb-2.5 border-b border-slate-100">
             <div className="flex items-center gap-1.5">
-              <ShieldCheck className="w-4 h-4 text-cyan-400 flex-shrink-0" />
-              <span className="text-[11px] font-semibold tracking-wider text-cyan-300 uppercase">
+              <ShieldCheck className="w-4 h-4 text-[#00205b] flex-shrink-0" />
+              <span className="text-[11px] font-bold tracking-wider text-[#00205b] uppercase">
                 Audit Provenance Record
               </span>
             </div>
@@ -118,10 +118,10 @@ export default function ProvenanceTooltip({
           <div className="mt-3 space-y-2.5 text-xs">
             {title && (
               <div>
-                <div className="text-[10px] uppercase font-semibold text-slate-400 tracking-wider">
+                <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
                   Title / Subject
                 </div>
-                <div className="font-semibold text-slate-100 text-xs mt-0.5 leading-snug">
+                <div className="font-bold text-slate-900 text-xs mt-0.5 leading-snug">
                   {title}
                 </div>
               </div>
@@ -129,31 +129,31 @@ export default function ProvenanceTooltip({
 
             {issuingBody && (
               <div>
-                <div className="text-[10px] uppercase font-semibold text-slate-400 tracking-wider">
+                <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
                   Issuing Body / Regulatory Authority
                 </div>
-                <div className="text-slate-200 mt-0.5 font-medium flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                <div className="text-slate-800 mt-0.5 font-medium flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#004b87]"></span>
                   {issuingBody}
                 </div>
               </div>
             )}
 
             {documentId && (
-              <div className="grid grid-cols-2 gap-2 bg-slate-900/80 p-2 rounded-lg border border-slate-800">
+              <div className="grid grid-cols-2 gap-2 bg-slate-50 p-2 rounded-lg border border-slate-200">
                 <div>
-                  <div className="text-[10px] uppercase font-semibold text-slate-400">
+                  <div className="text-[10px] uppercase font-bold text-slate-400">
                     Document / Docket ID
                   </div>
-                  <div className="font-mono text-cyan-300 font-semibold text-[11px] mt-0.5 truncate">
+                  <div className="font-mono text-[#00205b] font-bold text-[11px] mt-0.5 truncate">
                     {documentId}
                   </div>
                 </div>
                 <div>
-                  <div className="text-[10px] uppercase font-semibold text-slate-400">
+                  <div className="text-[10px] uppercase font-bold text-slate-400">
                     Evidence Level
                   </div>
-                  <div className="font-mono text-emerald-300 font-semibold text-[11px] mt-0.5">
+                  <div className="font-mono text-emerald-800 font-semibold text-[11px] mt-0.5">
                     {provenanceType === 'STATUTORY' ? 'Statutory Code' : provenanceType === 'CLINICAL' ? 'RCT Phase III' : provenanceType === 'EPIDEMIOLOGY' ? 'Registry / HES' : 'Calibrated Alg.'}
                   </div>
                 </div>
@@ -162,16 +162,17 @@ export default function ProvenanceTooltip({
 
             {citation && (
               <div>
-                <div className="text-[10px] uppercase font-semibold text-slate-400 tracking-wider flex items-center justify-between">
+                <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider flex items-center justify-between">
                   <span>Source Citation String</span>
                   <button
+                    type="button"
                     onClick={handleCopyCitation}
-                    className="text-[10px] text-cyan-400 hover:text-cyan-200 inline-flex items-center gap-1"
+                    className="text-[10px] text-[#004b87] hover:text-[#00205b] inline-flex items-center gap-1 font-semibold"
                   >
                     {copied ? (
                       <>
-                        <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-                        <span className="text-emerald-400">Copied</span>
+                        <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                        <span className="text-emerald-700">Copied</span>
                       </>
                     ) : (
                       <>
@@ -181,7 +182,7 @@ export default function ProvenanceTooltip({
                     )}
                   </button>
                 </div>
-                <div className="text-slate-300 italic text-[11px] mt-0.5 bg-slate-900/60 p-2 rounded border border-slate-800/80">
+                <div className="text-slate-700 italic text-[11px] mt-0.5 bg-slate-50 p-2 rounded border border-slate-200">
                   "{citation}"
                 </div>
               </div>
@@ -189,25 +190,25 @@ export default function ProvenanceTooltip({
 
             {methodologyNote && (
               <div>
-                <div className="text-[10px] uppercase font-semibold text-amber-400/90 tracking-wider">
+                <div className="text-[10px] uppercase font-bold text-amber-800 tracking-wider">
                   Methodological & Modeling Note
                 </div>
-                <div className="text-slate-300 text-[11px] mt-0.5 leading-relaxed bg-amber-950/20 p-2 rounded border border-amber-900/30">
+                <div className="text-slate-700 text-[11px] mt-0.5 leading-relaxed bg-amber-50 p-2 rounded border border-amber-200">
                   {methodologyNote}
                 </div>
               </div>
             )}
           </div>
 
-          {/* Footer action */}
+          {/* Footer action with direct link */}
           {citationUrl && (
-            <div className="mt-3 pt-2.5 border-t border-slate-800 flex items-center justify-between text-[11px]">
+            <div className="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[11px]">
               <span className="text-slate-400">Official Portal:</span>
               <a
                 href={citationUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1 text-cyan-400 hover:text-cyan-300 hover:underline font-medium"
+                className="inline-flex items-center gap-1 text-[#004b87] hover:text-[#00205b] hover:underline font-semibold"
               >
                 <span>Access Guideline Portal</span>
                 <ExternalLink className="w-3 h-3" />
@@ -217,7 +218,7 @@ export default function ProvenanceTooltip({
 
           {/* Decorative Arrow */}
           <div
-            className={`absolute w-2.5 h-2.5 rotate-45 bg-slate-950 border-cyan-500/30 ${
+            className={`absolute w-2.5 h-2.5 rotate-45 bg-white border-slate-200 ${
               position === 'top'
                 ? 'bottom-[-6px] border-r border-b'
                 : 'top-[-6px] border-l border-t'

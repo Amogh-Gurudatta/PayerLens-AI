@@ -5,11 +5,12 @@ import ComparisonChart from './components/ComparisonChart';
 import EvidenceMatrix from './components/EvidenceMatrix';
 import CountryModal from './components/CountryModal';
 import EvidenceModal from './components/EvidenceModal';
+import MethodologyModal from './components/MethodologyModal';
 import ProvenanceDrawer from './components/ProvenanceDrawer';
 import { SCENARIOS, calculateSimulatedAccess } from './data/payerData';
 import {
   Sliders, Activity, Users, ShieldCheck, CheckSquare, Square, RefreshCw,
-  Info, ExternalLink
+  Info, ExternalLink, Calculator
 } from 'lucide-react';
 
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
   // Modals State
   const [activeCountryModal, setActiveCountryModal] = useState(null); // 'UK' | 'DE' | 'FR' | null
   const [activeEvidenceModal, setActiveEvidenceModal] = useState(null); // 'clinical' | 'objections' | 'strategy' | null
+  const [isMethodologyOpen, setIsMethodologyOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   // Active Scenario Object
@@ -47,6 +49,7 @@ export default function App() {
       {/* Full-width Novo Nordisk Corporate Header */}
       <Header
         onOpenDrawer={() => setIsDrawerOpen(true)}
+        onOpenMethodology={() => setIsMethodologyOpen(true)}
         activeScenario={currentScenario}
       />
 
@@ -281,6 +284,12 @@ export default function App() {
           setActiveEvidenceModal(null);
           setIsDrawerOpen(true);
         }}
+      />
+
+      {/* Methodology & Numbers Derivation Modal */}
+      <MethodologyModal
+        isOpen={isMethodologyOpen}
+        onClose={() => setIsMethodologyOpen(false)}
       />
 
       {/* Slide-Over 3-Layer Data Architecture & Full Provenance Drawer */}

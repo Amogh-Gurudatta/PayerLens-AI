@@ -146,8 +146,21 @@ export default function CountryModal({
               <div className="text-[11px] text-slate-600 mt-0.5">{ecosystem.budgetTrigger}</div>
             </div>
 
-            <div className="bg-white p-3.5 rounded-xl border border-slate-200 shadow-xs space-y-1">
-              <span className="text-[10px] font-bold uppercase text-slate-400">Historical Benchmark Precedent</span>
+            <div className="bg-white p-3.5 rounded-xl border border-slate-200 shadow-xs space-y-1.5">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-bold uppercase text-slate-400">Historical Benchmark Precedent</span>
+                {ecosystem.benchmarkUrl && (
+                  <a
+                    href={ecosystem.benchmarkUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#004b87] hover:underline"
+                  >
+                    <span>View Ruling ({ecosystem.benchmarkDocId})</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                )}
+              </div>
               <div className="text-slate-800 text-xs font-medium italic">{ecosystem.benchmarkPrecedent}</div>
             </div>
           </div>
@@ -176,8 +189,21 @@ export default function CountryModal({
 
         {/* Modal Footer */}
         <div className="bg-slate-50 p-4 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3 text-xs">
-          <div className="text-[11px] text-slate-500 font-mono">
-            Document Docket: <strong className="text-slate-800">{ecosystem.documentId}</strong>
+          <div className="text-[11px] text-slate-500 font-mono flex items-center gap-1.5">
+            <span>Document Docket:</span>
+            {ecosystem.citationUrl ? (
+              <a
+                href={ecosystem.citationUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="font-bold text-[#004b87] hover:underline inline-flex items-center gap-1"
+              >
+                <span>{ecosystem.documentId}</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            ) : (
+              <strong className="text-slate-800">{ecosystem.documentId}</strong>
+            )}
           </div>
 
           <div className="flex items-center gap-3">

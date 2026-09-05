@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { ShieldCheck, Activity, ChevronDown, BookOpen, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, Activity, ChevronDown, BookOpen, Calculator } from 'lucide-react';
 import ProvenanceBadge from './ProvenanceBadge';
 
-export default function Header({ onOpenDrawer, activeScenario }) {
+export default function Header({ onOpenDrawer, onOpenMethodology, activeScenario }) {
   const [showLegendPopover, setShowLegendPopover] = useState(false);
 
   return (
@@ -57,13 +57,25 @@ export default function Header({ onOpenDrawer, activeScenario }) {
           </div>
 
           {/* Action Header Items */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
+            {/* Number Derivations & Methodology Button */}
+            <button
+              type="button"
+              onClick={onOpenMethodology}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 border border-white/20 text-xs text-blue-100 transition-colors font-medium"
+              title="How are these numbers calculated & derived?"
+            >
+              <Calculator className="w-3.5 h-3.5 text-blue-200" />
+              <span className="hidden md:inline">How Numbers are Derived</span>
+              <span className="md:hidden">Methodology</span>
+            </button>
+
             {/* Provenance Taxonomy Dropdown */}
             <div className="relative">
               <button
                 type="button"
                 onClick={() => setShowLegendPopover(!showLegendPopover)}
-                className="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 border border-white/20 text-xs text-blue-100 transition-colors"
+                className="hidden lg:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 border border-white/20 text-xs text-blue-100 transition-colors"
                 title="View Provenance Taxonomy"
               >
                 <BookOpen className="w-3.5 h-3.5 text-blue-200" />
@@ -107,7 +119,7 @@ export default function Header({ onOpenDrawer, activeScenario }) {
               id="open-provenance-drawer-btn"
               type="button"
               onClick={onOpenDrawer}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white text-[#00205b] hover:bg-blue-50 text-xs font-bold shadow-sm transition-all border border-white"
+              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-white text-[#00205b] hover:bg-blue-50 text-xs font-bold shadow-xs transition-all border border-white"
             >
               <ShieldCheck className="w-4 h-4 text-[#00205b]" />
               <span>Audit Trail Dossier</span>

@@ -288,9 +288,21 @@ export default function ProvenanceDrawer({ isOpen, onClose }) {
                             <span className="text-[10px] uppercase font-bold text-slate-400 block">
                               Identifier / DOI:
                             </span>
-                            <span className="font-mono text-[#004b87] font-semibold truncate block">
-                              {source.doi}
-                            </span>
+                            {source.url ? (
+                              <a
+                                href={source.url}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="font-mono text-[#004b87] font-semibold truncate block hover:underline"
+                                title="Open primary link"
+                              >
+                                {source.doi} &rarr;
+                              </a>
+                            ) : (
+                              <span className="font-mono text-[#004b87] font-semibold truncate block">
+                                {source.doi}
+                              </span>
+                            )}
                           </div>
                         </div>
 
@@ -301,8 +313,21 @@ export default function ProvenanceDrawer({ isOpen, onClose }) {
                           {source.notes}
                         </div>
 
-                        <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px]">
-                          <span className="text-slate-400">Compliance Verified</span>
+                        <div className="pt-2 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-[11px]">
+                          {source.url ? (
+                            <a
+                              href={source.url}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#00205b] hover:bg-[#003380] text-white text-xs font-semibold shadow-xs transition-colors"
+                            >
+                              <span>Open Official Source</span>
+                              <ExternalLink className="w-3.5 h-3.5" />
+                            </a>
+                          ) : (
+                            <span className="text-slate-400">Compliance Verified</span>
+                          )}
+
                           <button
                             type="button"
                             onClick={() => handleCopyCitation(source)}
