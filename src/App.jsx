@@ -7,11 +7,14 @@ import CountryModal from './components/CountryModal';
 import EvidenceModal from './components/EvidenceModal';
 import MethodologyModal from './components/MethodologyModal';
 import ProvenanceDrawer from './components/ProvenanceDrawer';
+import TeamPersonaBar from './components/TeamPersonaBar';
+import StrategicRecommendationBanner from './components/StrategicRecommendationBanner';
+import CustomSimulatorModal from './components/CustomSimulatorModal';
 import { SCENARIOS, calculateSimulatedAccess } from './data/payerData';
 import { getMLPrediction } from './services/mlService';
 import {
   Sliders, Activity, Users, ShieldCheck, CheckSquare, Square, RefreshCw,
-  Info, ExternalLink, Calculator, Cpu
+  Info, ExternalLink, Calculator, Cpu, Target
 } from 'lucide-react';
 
 export default function App() {
@@ -19,6 +22,8 @@ export default function App() {
   const [selectedScenarioKey, setSelectedScenarioKey] = useState('D'); // Default Scenario D: Biomarker-Defined High Risk
   const [priceEuros, setPriceEuros] = useState(4200); // Baseline specialty benchmark
   const [companionDiagnosticRequired, setCompanionDiagnosticRequired] = useState(true);
+  const [activeTeamId, setActiveTeamId] = useState('ALL');
+  const [isCustomSimOpen, setIsCustomSimOpen] = useState(false);
   const [mlData, setMlData] = useState(null);
   const [isMlServerLive, setIsMlServerLive] = useState(false);
   
@@ -90,6 +95,18 @@ export default function App() {
       {/* Main Full-Width Content Container */}
       <main className="flex-1 w-full px-4 sm:px-6 lg:px-10 py-6 space-y-6">
         
+        {/* 1. Novo Nordisk Silo Breaker Team Persona Bar */}
+        <TeamPersonaBar
+          activeTeamId={activeTeamId}
+          onSelectTeam={setActiveTeamId}
+        />
+
+        {/* 2. PS 20 Strategic Recommendation Engine Banner */}
+        <StrategicRecommendationBanner
+          currentScenario={currentScenario}
+          onOpenCustomSim={() => setIsCustomSimOpen(true)}
+        />
+
         {/* Top Control Bar: Cohort Switcher, Price Slider, Companion Diagnostic */}
         <section
           aria-label="Simulation Controls and Cohort Bar"
@@ -348,6 +365,12 @@ export default function App() {
       <ProvenanceDrawer
         isOpen={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
+      />
+
+      {/* Interactive Custom Molecule & Trial Endpoint Simulator Modal */}
+      <CustomSimulatorModal
+        isOpen={isCustomSimOpen}
+        onClose={() => setIsCustomSimOpen(false)}
       />
 
       {/* Full-Width Clean Corporate Footer */}
