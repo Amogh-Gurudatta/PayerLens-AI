@@ -78,20 +78,20 @@ The model was evaluated using **5-Fold Stratified Cross-Validation** across the 
 
 ## 4. Hackathon Scenario Predictions & Strict Mentor Hierarchy
 
-The model was scored on all 5 predefined Heart Failure scenarios:
+The model was scored on all 5 Heart Failure benchmark drug precedents:
 
-| Scenario Code | Scenario Name | UK Access Prob | DE Access Prob | FR Access Prob | EU-3 Average | HTA Hierarchy Status |
+| Benchmark Precedent Drug | Archetype & Scenario | UK Access Prob | DE Access Prob | FR Access Prob | EU-3 Average | HTA Hierarchy Status |
 |---|---|---|---|---|---|---|
-| **Scenario D** | Biomarker-Defined High Risk | **95.5%** | **93.5%** | **95.7%** | **94.9%** | **#1 Highest Priority** |
-| **Scenario C** | Frequent Hospitalisations History | **94.7%** | **92.6%** | **95.2%** | **94.2%** | **#2 High Priority** |
-| **Scenario B** | High Risk Despite SoC | **85.1%** | **82.1%** | **86.3%** | **84.5%** | **#3 Moderate-High** |
-| **Scenario E** | Later-Line Refractory | **46.1%** | **12.4%** | **54.4%** | **37.6%** | **#4 Restricted Access** |
-| **Scenario A** | Broad HF Population (Unselected) | **13.7%** | **9.7%** | **17.2%** | **13.5%** | **#5 Lowest Priority** |
+| **Farxiga (dapagliflozin)** | Scenario D: Biomarker-Defined (DAPA-HF) | **95.5%** | **93.5%** | **95.7%** | **94.9%** | **#1 Highest Priority** |
+| **Verquvo (vericiguat)** | Scenario C: Post-Worsening (VICTORIA) | **94.7%** | **92.6%** | **95.2%** | **94.2%** | **#2 High Priority** |
+| **Entresto (sacubitril/valsartan)** | Scenario B: Post-SoC Failure (PARADIGM-HF) | **85.1%** | **82.1%** | **86.3%** | **84.5%** | **#3 Moderate-High** |
+| **Jardiance (empagliflozin)** | Scenario E: Severe Unmet Need (EMPEROR-R) | **46.1%** | **12.4%** | **54.4%** | **37.6%** | **#4 Restricted Access** |
+| **Broad Class Precedent** | Scenario A: Broad Unselected (TA388 Initial) | **13.7%** | **9.7%** | **17.2%** | **13.5%** | **#5 Lowest Priority** |
 
 > [!NOTE]
 > **Strict Monotonic Verification**: The model strictly satisfies the mentor heuristic hierarchy:
-> $$\text{Scenario D} \ge \text{Scenario C} \ge \text{Scenario B} \ge \text{Scenario E} \ge \text{Scenario A}$$
-> across all three European jurisdictions. Biomarker-defined high risk (Scenario D) achieves the highest access probability due to enriched absolute risk reduction and smaller budget footprint, while unselected broad cohorts (Scenario A) suffer severe penalties due to €85M budget impact and diluted efficacy.
+> $$\text{Farxiga (D)} \ge \text{Verquvo (C)} \ge \text{Entresto (B)} \ge \text{Jardiance (E)} \ge \text{Broad Precedent (A)}$$
+> across all three European jurisdictions. Biomarker-defined high risk (Farxiga precedent) achieves the highest access probability due to enriched absolute risk reduction and smaller budget footprint, while unselected broad cohorts suffer severe penalties due to €85M budget impact and diluted efficacy.
 
 ---
 
