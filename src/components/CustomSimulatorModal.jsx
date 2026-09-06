@@ -155,15 +155,15 @@ export default function CustomSimulatorModal({ isOpen, onClose }) {
 
           {/* Head to Head Comparator */}
           <div className="space-y-1.5 bg-slate-50 p-3 rounded-xl border border-slate-200">
-            <span className="font-bold text-xs text-slate-700 block">Direct Head-to-Head vs SoC (zVT)</span>
+            <span className="font-semibold text-xs text-slate-700 block">Direct Head-to-Head vs SoC (zVT)</span>
             <div className="flex gap-2">
               <button
                 type="button"
                 onClick={() => setDirectComparator(1)}
-                className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                className={`flex-1 py-1.5 rounded-lg text-xs font-medium transition-colors border ${
                   directComparator === 1
-                    ? 'bg-emerald-700 text-white'
-                    : 'bg-white text-slate-700 border border-slate-300'
+                    ? 'bg-emerald-50 border-emerald-300 text-emerald-800'
+                    : 'bg-white text-slate-500 border-slate-200'
                 }`}
               >
                 Yes (Head-to-Head Trial)
@@ -171,10 +171,10 @@ export default function CustomSimulatorModal({ isOpen, onClose }) {
               <button
                 type="button"
                 onClick={() => setDirectComparator(0)}
-                className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                className={`flex-1 py-1.5 rounded-lg text-xs font-medium transition-colors border ${
                   directComparator === 0
-                    ? 'bg-rose-700 text-white'
-                    : 'bg-white text-slate-700 border border-slate-300'
+                    ? 'bg-rose-50 border-rose-300 text-rose-800'
+                    : 'bg-white text-slate-500 border-slate-200'
                 }`}
               >
                 No (Placebo / ITC)
@@ -185,15 +185,15 @@ export default function CustomSimulatorModal({ isOpen, onClose }) {
 
           {/* Biomarker Stratified */}
           <div className="space-y-1.5 bg-slate-50 p-3 rounded-xl border border-slate-200">
-            <span className="font-bold text-xs text-slate-700 block">Biomarker Companion Diagnostic</span>
+            <span className="font-semibold text-xs text-slate-700 block">Biomarker Companion Diagnostic</span>
             <div className="flex gap-2">
               <button
                 type="button"
                 onClick={() => setBiomarkerDefined(1)}
-                className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                className={`flex-1 py-1.5 rounded-lg text-xs font-medium transition-colors border ${
                   biomarkerDefined === 1
-                    ? 'bg-blue-700 text-white'
-                    : 'bg-white text-slate-700 border border-slate-300'
+                    ? 'bg-blue-50 border-blue-300 text-[#00205b]'
+                    : 'bg-white text-slate-500 border-slate-200'
                 }`}
               >
                 Yes (NT-proBNP &gt; 1,000)
@@ -201,10 +201,10 @@ export default function CustomSimulatorModal({ isOpen, onClose }) {
               <button
                 type="button"
                 onClick={() => setBiomarkerDefined(0)}
-                className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                className={`flex-1 py-1.5 rounded-lg text-xs font-medium transition-colors border ${
                   biomarkerDefined === 0
-                    ? 'bg-slate-700 text-white'
-                    : 'bg-white text-slate-700 border border-slate-300'
+                    ? 'bg-slate-100 border-slate-300 text-slate-700'
+                    : 'bg-white text-slate-500 border-slate-200'
                 }`}
               >
                 No (Unselected Broad)
@@ -215,15 +215,15 @@ export default function CustomSimulatorModal({ isOpen, onClose }) {
 
           {/* Quality of Life (PRO) Improvement */}
           <div className="space-y-1.5 bg-slate-50 p-3 rounded-xl border border-slate-200">
-            <span className="font-bold text-xs text-slate-700 block">Health-Related Quality of Life (PRO)</span>
+            <span className="font-semibold text-xs text-slate-700 block">Health-Related Quality of Life (PRO)</span>
             <div className="flex gap-2">
               <button
                 type="button"
                 onClick={() => setQolImprovement(1)}
-                className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                className={`flex-1 py-1.5 rounded-lg text-xs font-medium transition-colors border ${
                   qolImprovement === 1
-                    ? 'bg-[#00205b] text-white'
-                    : 'bg-white text-slate-700 border border-slate-300'
+                    ? 'bg-blue-50 border-blue-300 text-[#00205b]'
+                    : 'bg-white text-slate-500 border-slate-200'
                 }`}
               >
                 Significant (KCCQ / EQ-5D)
@@ -231,10 +231,10 @@ export default function CustomSimulatorModal({ isOpen, onClose }) {
               <button
                 type="button"
                 onClick={() => setQolImprovement(0)}
-                className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                className={`flex-1 py-1.5 rounded-lg text-xs font-medium transition-colors border ${
                   qolImprovement === 0
-                    ? 'bg-slate-700 text-white'
-                    : 'bg-white text-slate-700 border border-slate-300'
+                    ? 'bg-slate-100 border-slate-300 text-slate-700'
+                    : 'bg-white text-slate-500 border-slate-200'
                 }`}
               >
                 No Significant Gain
@@ -245,15 +245,15 @@ export default function CustomSimulatorModal({ isOpen, onClose }) {
 
           {/* Evidence Hierarchy Grade */}
           <div className="space-y-1.5 bg-slate-50 p-3 rounded-xl border border-slate-200">
-            <span className="font-bold text-xs text-slate-700 block">Study Design Grade</span>
+            <span className="font-semibold text-xs text-slate-700 block">Study Design Grade</span>
             <div className="flex gap-2">
               <button
                 type="button"
                 onClick={() => setEvidenceGrade(3)}
-                className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                className={`flex-1 py-1.5 rounded-lg text-xs font-medium transition-colors border ${
                   evidenceGrade === 3
-                    ? 'bg-[#00205b] text-white'
-                    : 'bg-white text-slate-700 border border-slate-300'
+                    ? 'bg-blue-50 border-blue-300 text-[#00205b]'
+                    : 'bg-white text-slate-500 border-slate-200'
                 }`}
               >
                 Phase 3 RCT
@@ -261,10 +261,10 @@ export default function CustomSimulatorModal({ isOpen, onClose }) {
               <button
                 type="button"
                 onClick={() => setEvidenceGrade(2)}
-                className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                className={`flex-1 py-1.5 rounded-lg text-xs font-medium transition-colors border ${
                   evidenceGrade === 2
-                    ? 'bg-amber-700 text-white'
-                    : 'bg-white text-slate-700 border border-slate-300'
+                    ? 'bg-amber-50 border-amber-300 text-amber-800'
+                    : 'bg-white text-slate-500 border-slate-200'
                 }`}
               >
                 Pragmatic RCT
@@ -272,10 +272,10 @@ export default function CustomSimulatorModal({ isOpen, onClose }) {
               <button
                 type="button"
                 onClick={() => setEvidenceGrade(1)}
-                className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                className={`flex-1 py-1.5 rounded-lg text-xs font-medium transition-colors border ${
                   evidenceGrade === 1
-                    ? 'bg-rose-700 text-white'
-                    : 'bg-white text-slate-700 border border-slate-300'
+                    ? 'bg-rose-50 border-rose-300 text-rose-800'
+                    : 'bg-white text-slate-500 border-slate-200'
                 }`}
               >
                 Phase 2 / ITC
@@ -286,15 +286,15 @@ export default function CustomSimulatorModal({ isOpen, onClose }) {
 
           {/* Subgroup Pre-specification */}
           <div className="space-y-1.5 bg-slate-50 p-3 rounded-xl border border-slate-200">
-            <span className="font-bold text-xs text-slate-700 block">Subgroup Statistical Specification</span>
+            <span className="font-semibold text-xs text-slate-700 block">Subgroup Statistical Specification</span>
             <div className="flex gap-2">
               <button
                 type="button"
                 onClick={() => setPrespecifiedSubgroup(1)}
-                className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                className={`flex-1 py-1.5 rounded-lg text-xs font-medium transition-colors border ${
                   prespecifiedSubgroup === 1
-                    ? 'bg-emerald-700 text-white'
-                    : 'bg-white text-slate-700 border border-slate-300'
+                    ? 'bg-emerald-50 border-emerald-300 text-emerald-800'
+                    : 'bg-white text-slate-500 border-slate-200'
                 }`}
               >
                 Pre-specified in SAP
@@ -302,10 +302,10 @@ export default function CustomSimulatorModal({ isOpen, onClose }) {
               <button
                 type="button"
                 onClick={() => setPrespecifiedSubgroup(0)}
-                className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                className={`flex-1 py-1.5 rounded-lg text-xs font-medium transition-colors border ${
                   prespecifiedSubgroup === 0
-                    ? 'bg-rose-700 text-white'
-                    : 'bg-white text-slate-700 border border-slate-300'
+                    ? 'bg-rose-50 border-rose-300 text-rose-800'
+                    : 'bg-white text-slate-500 border-slate-200'
                 }`}
               >
                 Post-hoc Exploratory
@@ -343,36 +343,36 @@ export default function CustomSimulatorModal({ isOpen, onClose }) {
 
         {/* Prediction Results Display */}
         {predictionResult && (
-          <div className="bg-slate-900 text-white p-4 rounded-xl space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-300">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4" />
-                <span>Calibrated HTA Access Probabilities & Decision Drivers</span>
+          <div className="bg-white border border-slate-200 rounded-xl p-4 space-y-4">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <span className="text-xs font-semibold text-[#00205b] flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                <span>Calibrated HTA access probabilities & decision drivers</span>
               </span>
               <span className="text-[10px] font-mono text-slate-400">
                 {predictionResult.isLive
-                  ? `FastAPI Ensemble Live${modelCvAccuracy != null ? ` (${modelCvAccuracy.toFixed(1)}% CV)` : ''}`
-                  : 'Calibrated Local Ensemble Artifact'}
+                  ? `FastAPI live${modelCvAccuracy != null ? ` (${modelCvAccuracy.toFixed(1)}% CV)` : ''}`
+                  : 'Calibrated local ensemble'}
               </span>
             </div>
 
             {/* Score Grid */}
             <div className="grid grid-cols-4 gap-2.5 text-center">
-              <div className="bg-slate-800 p-2.5 rounded-lg border border-slate-700">
-                <div className="text-[10px] text-slate-400 font-bold">🇬🇧 UK (NICE)</div>
-                <div className="text-xl font-extrabold font-mono text-blue-400 mt-1">{predictionResult.UK}%</div>
+              <div className="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+                <div className="text-[10px] text-slate-500 font-medium">🇬🇧 UK (NICE)</div>
+                <div className="text-xl font-semibold font-mono text-[#00205b] mt-1">{predictionResult.UK}%</div>
               </div>
-              <div className="bg-slate-800 p-2.5 rounded-lg border border-slate-700">
-                <div className="text-[10px] text-slate-400 font-bold">🇩🇪 GERMANY (G-BA)</div>
-                <div className="text-xl font-extrabold font-mono text-amber-400 mt-1">{predictionResult.Germany}%</div>
+              <div className="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+                <div className="text-[10px] text-slate-500 font-medium">🇩🇪 GERMANY (G-BA)</div>
+                <div className="text-xl font-semibold font-mono text-emerald-700 mt-1">{predictionResult.Germany}%</div>
               </div>
-              <div className="bg-slate-800 p-2.5 rounded-lg border border-slate-700">
-                <div className="text-[10px] text-slate-400 font-bold">🇫🇷 FRANCE (HAS)</div>
-                <div className="text-xl font-extrabold font-mono text-indigo-400 mt-1">{predictionResult.France}%</div>
+              <div className="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+                <div className="text-[10px] text-slate-500 font-medium">🇫🇷 FRANCE (HAS)</div>
+                <div className="text-xl font-semibold font-mono text-sky-700 mt-1">{predictionResult.France}%</div>
               </div>
-              <div className="bg-slate-800/80 p-2.5 rounded-lg border border-emerald-500/40">
-                <div className="text-[10px] text-emerald-400 font-bold">EU-3 COMPOSITE</div>
-                <div className="text-xl font-extrabold font-mono text-emerald-400 mt-1">
+              <div className="bg-blue-50 p-2.5 rounded-lg border border-blue-200">
+                <div className="text-[10px] text-[#00205b] font-medium">EU-3 composite</div>
+                <div className="text-xl font-semibold font-mono text-[#00205b] mt-1">
                   {predictionResult.composite ?? Math.round((predictionResult.UK + predictionResult.Germany + predictionResult.France) / 3)}%
                 </div>
               </div>
@@ -380,19 +380,19 @@ export default function CustomSimulatorModal({ isOpen, onClose }) {
 
             {/* Explainability Decision Drivers */}
             {predictionResult.decision_drivers && (
-              <div className="bg-slate-850 p-3 rounded-lg border border-slate-800 space-y-2">
+              <div className="bg-slate-50 p-3 rounded-lg border border-slate-200 space-y-2">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="font-bold text-slate-300">Jurisdiction Decision Drivers:</span>
-                  <div className="flex gap-1">
+                  <span className="font-medium text-slate-600">Jurisdiction decision drivers</span>
+                  <div className="flex gap-1 p-0.5 bg-white rounded-md border border-slate-200">
                     {['DE', 'UK', 'FR'].map((cntry) => (
                       <button
                         key={cntry}
                         type="button"
                         onClick={() => setActiveDriverTab(cntry)}
-                        className={`text-[10px] px-2 py-0.5 rounded font-mono font-bold transition-all ${
+                        className={`text-[10px] px-2 py-0.5 rounded font-medium transition-colors ${
                           activeDriverTab === cntry
-                            ? 'bg-blue-600 text-white'
-                            : 'bg-slate-800 text-slate-400 hover:text-white'
+                            ? 'bg-[#00205b] text-white'
+                            : 'text-slate-500 hover:text-slate-800'
                         }`}
                       >
                         {cntry === 'DE' ? 'Germany' : cntry === 'UK' ? 'UK' : 'France'}
@@ -407,24 +407,24 @@ export default function CustomSimulatorModal({ isOpen, onClose }) {
                     : activeDriverTab === 'UK'
                     ? predictionResult.decision_drivers.UK
                     : predictionResult.decision_drivers.France;
-                    
+
                   if (!drivers) return null;
                   return (
                     <div className="space-y-1.5 pt-1 text-[11px]">
                       {drivers.catalysts && drivers.catalysts.map((c, idx) => (
-                        <div key={idx} className="flex items-center gap-1.5 text-emerald-400">
+                        <div key={idx} className="flex items-center gap-1.5 text-emerald-700">
                           <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0" />
                           <span>{c}</span>
                         </div>
                       ))}
                       {drivers.frictions && drivers.frictions.map((f, idx) => (
-                        <div key={idx} className="flex items-center gap-1.5 text-amber-400">
+                        <div key={idx} className="flex items-center gap-1.5 text-amber-700">
                           <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" />
                           <span>{f}</span>
                         </div>
                       ))}
                       {(!drivers.catalysts?.length && !drivers.frictions?.length) && (
-                        <span className="text-slate-500 italic">Baseline neutral appraisal conditions.</span>
+                        <span className="text-slate-400 italic">Baseline neutral appraisal conditions.</span>
                       )}
                     </div>
                   );
